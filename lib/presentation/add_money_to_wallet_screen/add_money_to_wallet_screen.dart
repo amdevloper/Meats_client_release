@@ -79,28 +79,6 @@ class AddMoneyToWalletScreen extends StatelessWidget {
                                   margin: getMargin(top: 363),
                                   padding: ButtonPadding.PaddingAll16,
                                   onTap: () => onTapPay50Zero(context)),
-                              Container(
-                                  width: size.width,
-                                  margin: getMargin(top: 26),
-                                  padding: getPadding(
-                                      left: 163, top: 8, right: 163, bottom: 8),
-                                  decoration: AppDecoration.fillWhiteA700
-                                      .copyWith(
-                                          borderRadius: BorderRadiusStyle
-                                              .customBorderTL16),
-                                  child: Column(
-                                      mainAxisSize: MainAxisSize.min,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        CustomImageView(
-                                            svgPath: ImageConstant.imgRectangle,
-                                            height: getVerticalSize(5.00),
-                                            width: getHorizontalSize(48.00),
-                                            radius: BorderRadius.circular(
-                                                getHorizontalSize(2.00)),
-                                            margin: getMargin(bottom: 3))
-                                      ]))
                             ]))))));
   }
 

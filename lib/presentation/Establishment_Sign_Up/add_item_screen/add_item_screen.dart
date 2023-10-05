@@ -133,21 +133,7 @@ class AddItemScreen extends StatelessWidget {
                               text: "Add Item",
                               margin: getMargin(top: 40, bottom: 5))
                         ]))),
-            bottomNavigationBar: Container(
-                padding: getPadding(left: 163, top: 6, right: 163, bottom: 6),
-                decoration: AppDecoration.fillWhiteA700,
-                child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      CustomImageView(
-                          svgPath: ImageConstant.imgRectangle,
-                          height: getVerticalSize(5.00),
-                          width: getHorizontalSize(48.00),
-                          radius:
-                              BorderRadius.circular(getHorizontalSize(2.00)),
-                          margin: getMargin(top: 2))
-                    ]))));
+        ));
   }
 
   onTapArrowleft22(BuildContext context) {

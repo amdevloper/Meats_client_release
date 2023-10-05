@@ -2,7 +2,7 @@ class ImageConstant {
   static String imgEllipse724x24 = 'assets/images/img_ellipse7_24x24.png';
 
   static String imgImageplaceholder4 =
-      'assets/images/img_imageplaceholder_4.png';
+      'assets/images/img_imageplaceholder_1.png';
 
   static String imgSearchBlueGray30018x18 =
       'assets/images/img_search_blue_gray_300_18x18.svg';
@@ -83,7 +83,7 @@ class ImageConstant {
   static String imgFileGray9000124x24 =
       'assets/images/img_file_gray_900_01_24x24.svg';
 
-  static String imgGroup17868 = 'assets/images/img_group17868.svg';
+  // static String imgGroup17868 = 'assets/images/img_group17868.svg';
 
   static String imgImageplaceholder126x125 =
       'assets/images/img_imageplaceholder_126x125.png';
@@ -159,7 +159,7 @@ class ImageConstant {
 
   static String imgArrowright = 'assets/images/img_arrowright.svg';
 
-  static String imgImage2 = 'assets/images/img_image_2.png';
+  static String imgImage2 = 'assets/images/img_imageplaceholder_1.png';
 
   static String imgFileWhiteA700 = 'assets/images/img_file_white_a700.svg';
 
@@ -170,7 +170,6 @@ class ImageConstant {
 
   static String imgArrowrightGray900 =
       'assets/images/img_arrowright_gray_900.svg';
-
   static String imgImageplaceholder27x27 =
       'assets/images/img_imageplaceholder_27x27.png';
 
@@ -313,7 +312,7 @@ class ImageConstant {
 
   static String imgLocation = 'assets/images/img_location.svg';
 
-  static String imgRectangle = 'assets/images/img_rectangle.svg';
+  // static String imgRectangle = 'assets/images/img_rectangle.svg';
 
   static String imgComputerGray900 = 'assets/images/img_computer_gray_900.svg';
 
@@ -441,7 +440,7 @@ class ImageConstant {
   static String imgGroup127 = 'assets/images/img_group127.svg';
 
   static String imgImageplaceholder47 =
-      'assets/images/img_imageplaceholder_47.png';
+      'assets/images/img_imageplaceholder_1.png';
 
   static String imgEllipse714 = 'assets/images/img_ellipse7_14.png';
 
@@ -449,7 +448,7 @@ class ImageConstant {
       'assets/images/img_imageplaceholder_58.png';
 
   static String imgImageplaceholder41 =
-      'assets/images/img_imageplaceholder_41.png';
+      'assets/images/img_imageplaceholder_1.png';
 
   static String imgUnsplashvy2y1cclit8 =
       'assets/images/img_unsplashvy2y1cclit8.png';
@@ -460,10 +459,10 @@ class ImageConstant {
       'assets/images/img_imageplaceholder_23.png';
 
   static String imgImageplaceholder43 =
-      'assets/images/img_imageplaceholder_43.png';
+      'assets/images/img_imageplaceholder_1.png';
 
   static String imgImageplaceholder40 =
-      'assets/images/img_imageplaceholder_40.png';
+      'assets/images/img_imageplaceholder_1.png';
 
   static String imgArrowrightBlueGray30019x19 =
       'assets/images/img_arrowright_blue_gray_300_19x19.svg';
@@ -472,10 +471,10 @@ class ImageConstant {
       'assets/images/img_imageplaceholder_31.png';
 
   static String imgImageplaceholder48 =
-      'assets/images/img_imageplaceholder_48.png';
+      'assets/images/img_imageplaceholder_1.png';
 
   static String imgImageplaceholder46 =
-      'assets/images/img_imageplaceholder_46.png';
+      'assets/images/img_imageplaceholder_1.png';
 
   static String imgNativebottom = 'assets/images/img_nativebottom.png';
 
@@ -598,7 +597,7 @@ class ImageConstant {
       'assets/images/img_imageplaceholder_35.png';
 
   static String imgImageplaceholder45 =
-      'assets/images/img_imageplaceholder_45.png';
+      'assets/images/img_imageplaceholder_1.png';
 
   static String imgUnsplashmqt0asuoicu =
       'assets/images/img_unsplashmqt0asuoicu.png';
@@ -648,7 +647,7 @@ class ImageConstant {
       'assets/images/img_imageplaceholder_24.png';
 
   static String imgImageplaceholder42 =
-      'assets/images/img_imageplaceholder_42.png';
+      'assets/images/img_imageplaceholder_1.png';
 
   static String imgUnsplashqgzrzipkgm =
       'assets/images/img_unsplashqgzrzipkgm.png';
@@ -681,10 +680,10 @@ class ImageConstant {
       'assets/images/img_imageplaceholder_29.png';
 
   static String imgImageplaceholder49 =
-      'assets/images/img_imageplaceholder_49.png';
+      'assets/images/img_imageplaceholder_1.png';
 
   static String imgImageplaceholder44 =
-      'assets/images/img_imageplaceholder_44.png';
+      'assets/images/img_imageplaceholder_1.png';
 
 
   static String imgPlusWhiteA700 = 'assets/images/img_plus_white_a700.svg';

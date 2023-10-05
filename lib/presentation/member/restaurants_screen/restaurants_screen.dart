@@ -11,6 +11,7 @@ import '../../../widgets/custom_bottom_bar.dart';
 import '../../../widgets/custom_button.dart';
 import '../../../widgets/custom_floating_button.dart';
 import '../../../widgets/custom_image_view.dart';
+import '../../restaurants_details_screen/restaurants_details_screen.dart';
 import '../member_home_screen/widgets/slider_one_item_widget.dart';
 import '../restaurants_screen/widgets/slidergroup18131_item_widget.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -20,7 +21,9 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 // ignore_for_file: must_be_immutable
 class RestaurantsScreen extends StatefulWidget {
-  const RestaurantsScreen({super.key});
+  final dynamic? arguments;
+
+  const RestaurantsScreen({super.key, this.arguments});
 
   @override
   State<RestaurantsScreen> createState() => _RestaurantsScreenState();
@@ -37,8 +40,31 @@ class _RestaurantsScreenState extends State<RestaurantsScreen> {
   final TextEditingController _textEditingController = TextEditingController();
 
 
-  @override
+ // Future<Map<String, dynamic>> itemByRestaurant() async {
+ //   final SharedPreferences prefs = await SharedPreferences.getInstance();
+ //   String? token = prefs.getString('token');
+ //   // int? userId = prefs.getInt('restarantId');
+ //   // try {
+ //   var request = http.Request(
+ //     'GET',
+ //     Uri.parse(
+ //         "http://ec2-34-227-30-202.compute-1.amazonaws.com/api/restaurant?item=$"),
+ //   )..headers.addAll({
+ //     'Content-Type': 'application/json',
+ //     'Authorization': token!,
+ //   });
+ //   // var params = {"id": userId};
+ //   // request.body = jsonEncode(params);
+ //   http.StreamedResponse response = await request.send();
+ //   Map<String, dynamic> object =
+ //   await json.decode(await response.stream.bytesToString());
+ //   return object;
+ // }
+
+
+ @override
   Widget build(BuildContext context) {
+    print("snapshot.data![""] ${widget.arguments}");
     return SafeArea(
         top: false,
         bottom: false,
@@ -200,10 +226,17 @@ class _RestaurantsScreenState extends State<RestaurantsScreen> {
                                             mainAxisSpacing: getHorizontalSize(19.00),
                                             crossAxisSpacing: getHorizontalSize(19.00)),
                                         physics: const NeverScrollableScrollPhysics(),
-                                        itemCount: 5,
+                                        itemCount:  widget.arguments.length,
                                         itemBuilder: (context, index) {
                                           return RestaurantListView(
-                                             onTapImgImagePlaceholderOne: onTapImgImagePlaceholder,
+                                            index: index,
+                                             listOfRestarunt: widget.arguments[index],
+                                            onTapImgImagePlaceholderOne:
+                                                (arguments) {
+                                              Navigator.of(context).push(MaterialPageRoute(builder: (context) =>
+                                                  RestaurantsDetailsScreen(
+                                                      arguments: arguments)));
+                                            },
                                             // index: index,
                                             // images: imagesV,
                                             // onImageRemove:(value) =>  imageRemove(value),

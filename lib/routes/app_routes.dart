@@ -12,6 +12,7 @@ import 'package:flutter/material.dart';
 
 // import '../Stripe.dart';
 import '../SignUpScreenMember/sign_up_screen_member.dart';
+import '../member_view_class.dart';
 import '../presentation/Delivery/Delivery_Sign_Up/add_money_to_wallet_screen_Delivery/add_money_to_wallet_screen_Delivery.dart';
 import '../presentation/Delivery/Delivery_Sign_Up/after_wallet_amount_added_screen_Delivery/after_wallet_amount_added_screen_Delivery.dart';
 import '../presentation/Delivery/Delivery_Sign_Up/credit_card_add_screen_Delivery/credit_card_add_screen_Delivery.dart';
@@ -85,6 +86,8 @@ import '../presentation/member/add_to_cart_screen/add_to_cart_screen.dart';
 import '../presentation/member/cart_delivery_address_not_available_screen/cart_delivery_address_not_available_screen.dart';
 import '../presentation/member/checkout_if_no_any_cards_added_screen/checkout_if_no_any_cards_added_screen.dart';
 import '../presentation/member/customize_screen/customize_screen.dart';
+import '../presentation/member/item_by_restaurant.dart';
+import '../presentation/member/profile_setup_screen/profile_setup_screen.dart';
 import '../presentation/member/restaurants_screen/restaurants_screen.dart';
 import '../presentation/menu_screen/menu_screen.dart';
 import '../presentation/my_status_menu1_screen/my_status_menu1_screen.dart';
@@ -395,6 +398,9 @@ class AppRoutes {
   static const String orderCompletedDetailsScreen =
       '/order_completed_details_screen';
 
+  static const String itemByRestaurant =
+      '/item_by_restaurant.dart';
+
   static const String orderRejectedDetailsScreen =
       '/order_rejected_details_screen';
 
@@ -402,13 +408,17 @@ class AppRoutes {
 
   static const String searchDishScreen = '/search_dish_screen';
 
+  static const String profileSetupScreen = '/profile_setup_screen.dart';
+
   static Map<String, WidgetBuilder> routes = {
+
+    profileSetupScreen:(context) => ProfileSetupScreen(),
     liveHomePage:(context) => LiveHomePage(),
     searchDishScreen:(context) => SearchDishScreen(),
     checkoutIfNoAnyCardsAddedScreen:(context) => CheckoutIfNoAnyCardsAddedScreen(),
     cartDeliveryAddressNotAvailableScreen:(context) =>  CartDeliveryAddressNotAvailableScreen(),
-    restaurantsDetailsScreen:(context) => RestaurantsDetailsScreen(),
-    restaurantsScreen:(context) => RestaurantsScreen(),
+    restaurantsDetailsScreen:(context) => RestaurantsDetailsScreen(arguments: ModalRoute.of(context)?.settings.arguments,),
+    restaurantsScreen:(context) => RestaurantsScreen(arguments: ModalRoute.of(context)?.settings.arguments,),
     bottomNavigationTabBar:(BuildContext context) => BottomNavigationTabBar(arguments: ModalRoute.of(context)?.settings.arguments,),
     launchScreen: (context) => LaunchScreen(),
     notificationsScreen: (context) => NotificationsScreen(),
@@ -508,6 +518,9 @@ class AppRoutes {
     signUpScreenDelivery: (context) => SignUpScreenDelivery(),
     signUpScreenEstablishment: (context) => SignUpScreenEstablishment(),
     addToCartScreen: (context) => AddToCartScreen(),
+    itemByRestaurant: (context) => ItemByRestaurant(arguments: ModalRoute.of(context)?.settings.arguments),
+
+
     // signUpScreenInfluencer: (context) => SignUpScreenInfluencer(),
     signUpScreenInMember: (context) => SignUpScreenMember(),
     moreInformationsScreen:(context) => const MoreInformationsScreen(),

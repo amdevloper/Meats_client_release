@@ -171,23 +171,7 @@ class MenuDetailsScreen extends StatelessWidget {
                           padding: ButtonPadding.PaddingAll9,
                           fontStyle: ButtonFontStyle.SofiaPro14)
                     ])),
-            bottomNavigationBar: Container(
-                width: size.width,
-                padding: getPadding(left: 163, top: 8, right: 163, bottom: 8),
-                decoration: AppDecoration.fillWhiteA700
-                    .copyWith(borderRadius: BorderRadiusStyle.customBorderTL16),
-                child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      CustomImageView(
-                          svgPath: ImageConstant.imgRectangle,
-                          height: getVerticalSize(5.00),
-                          width: getHorizontalSize(48.00),
-                          radius:
-                              BorderRadius.circular(getHorizontalSize(2.00)),
-                          margin: getMargin(bottom: 3))
-                    ]))));
+        ));
   }
 
   onTapAdditem(BuildContext context) {

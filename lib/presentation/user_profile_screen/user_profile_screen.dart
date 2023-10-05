@@ -405,41 +405,6 @@ class UserProfileScreen extends StatelessWidget {
                                             radius: BorderRadius.circular(
                                                 getHorizontalSize(10.00)),
                                             alignment: Alignment.center),
-                                        Align(
-                                            alignment: Alignment.bottomCenter,
-                                            child: Container(
-                                                width: size.width,
-                                                margin: getMargin(bottom: 16),
-                                                padding: getPadding(
-                                                    left: 163,
-                                                    top: 8,
-                                                    right: 163,
-                                                    bottom: 8),
-                                                decoration:
-                                                    AppDecoration.fillWhiteA700,
-                                                child: Column(
-                                                    mainAxisSize:
-                                                        MainAxisSize.min,
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .center,
-                                                    children: [
-                                                      CustomImageView(
-                                                          svgPath: ImageConstant
-                                                              .imgRectangle,
-                                                          height:
-                                                              getVerticalSize(
-                                                                  5.00),
-                                                          width:
-                                                              getHorizontalSize(
-                                                                  48.00),
-                                                          radius: BorderRadius
-                                                              .circular(
-                                                                  getHorizontalSize(
-                                                                      2.00)),
-                                                          margin: getMargin(
-                                                              bottom: 3))
-                                                    ])))
                                       ])),
                               Padding(
                                   padding: getPadding(top: 14),

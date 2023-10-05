@@ -119,12 +119,12 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                                     textAlign: TextAlign.left,
                                     style:
                                         AppStyle.txtRobotoMedium16Bluegray300)),
-                            CustomImageView(
-                                svgPath: ImageConstant.imgGroup17868,
-                                height: getVerticalSize(1.00),
-                                width: getHorizontalSize(293.00),
-                                alignment: Alignment.topCenter,
-                                margin: getMargin(top: 6))
+                            // CustomImageView(
+                            //     svgPath: ImageConstant.imgGroup17868,
+                            //     height: getVerticalSize(1.00),
+                            //     width: getHorizontalSize(293.00),
+                            //     alignment: Alignment.topCenter,
+                            //     margin: getMargin(top: 6))
                           ])),
                       Padding(
                           padding: getPadding(top: 18, left: MediaQuery.of(context).size.width/25),

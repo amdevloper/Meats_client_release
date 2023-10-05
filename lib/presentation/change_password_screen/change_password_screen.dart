@@ -100,22 +100,7 @@ class ChangePasswordScreen extends StatelessWidget {
                               text: "Update Password",
                               margin: getMargin(top: 30, bottom: 5))
                         ]))),
-            bottomNavigationBar: Container(
-                width: size.width,
-                padding: getPadding(left: 163, top: 8, right: 163, bottom: 8),
-                decoration: AppDecoration.fillWhiteA700,
-                child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      CustomImageView(
-                          svgPath: ImageConstant.imgRectangle,
-                          height: getVerticalSize(5.00),
-                          width: getHorizontalSize(48.00),
-                          radius:
-                              BorderRadius.circular(getHorizontalSize(2.00)),
-                          margin: getMargin(bottom: 3))
-                    ]))));
+        ));
   }
 
   onTapArrowleft27(BuildContext context) {

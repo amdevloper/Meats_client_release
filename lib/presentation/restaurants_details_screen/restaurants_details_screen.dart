@@ -29,7 +29,9 @@ import 'package:http/http.dart' as http;
 
 // ignore_for_file: must_be_immutable
 class RestaurantsDetailsScreen extends StatefulWidget {
-  const RestaurantsDetailsScreen({super.key});
+  final dynamic? arguments;
+
+  const RestaurantsDetailsScreen({super.key, this.arguments});
 
   @override
   State<RestaurantsDetailsScreen> createState() =>
@@ -51,28 +53,28 @@ class _RestaurantsDetailsScreenState extends State<RestaurantsDetailsScreen>
   dynamic valNew;
   Map<String, dynamic> restaurantApplicationData = {};
 
-  Future<Map<String, dynamic>> restaruntById() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    String? token = prefs.getString('token');
-    int? userId = prefs.getInt('restarantId');
-    // try {
-    var request = http.Request(
-      'GET',
-      Uri.parse(
-          "http://ec2-34-227-30-202.compute-1.amazonaws.com/api/get/restaurant"),
-    )..headers.addAll({
-      'Content-Type': 'application/json',
-      'Authorization': token!,
-    });
-    var params = {"id": userId};
-    request.body = jsonEncode(params);
-    http.StreamedResponse response = await request.send();
-    Map<String, dynamic> object =
-    await json.decode(await response.stream.bytesToString());
-    // cusineData = await cusineDataFunction();
-
-    return object;
-  }
+  // Future<Map<String, dynamic>> restaruntById() async {
+  //   final SharedPreferences prefs = await SharedPreferences.getInstance();
+  //   String? token = prefs.getString('token');
+  //   int? userId = prefs.getInt('restarantId');
+  //   // try {
+  //   var request = http.Request(
+  //     'GET',
+  //     Uri.parse(
+  //         "http://ec2-34-227-30-202.compute-1.amazonaws.com/api/get/restaurant"),
+  //   )..headers.addAll({
+  //     'Content-Type': 'application/json',
+  //     'Authorization': token!,
+  //   });
+  //   var params = {"id": userId};
+  //   request.body = jsonEncode(params);
+  //   http.StreamedResponse response = await request.send();
+  //   Map<String, dynamic> object =
+  //   await json.decode(await response.stream.bytesToString());
+  //   // cusineData = await cusineDataFunction();
+  //
+  //   return object;
+  // }
 
 
   List<Widget> tabBarList() {
@@ -176,15 +178,7 @@ class _RestaurantsDetailsScreenState extends State<RestaurantsDetailsScreen>
                       ])),
               styleType: Style.bgFillWhiteA700_1),
           body: SingleChildScrollView(
-            child: FutureBuilder<Map<String, dynamic>>(
-    future: restaruntById(),
-    builder:(BuildContext context, AsyncSnapshot<Map<String, dynamic>> snapshot) {
-    if (snapshot.connectionState == ConnectionState.waiting) {
-    return CircularProgressIndicator();
-    } else if (snapshot.hasError) {
-    return Text('Error: ${snapshot.error}');
-    } else {
-              return Column(mainAxisAlignment: MainAxisAlignment.start, children: [
+            child: Column(mainAxisAlignment: MainAxisAlignment.start, children: [
               Column(
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -193,7 +187,8 @@ class _RestaurantsDetailsScreenState extends State<RestaurantsDetailsScreen>
                     Padding(
                         padding: getPadding(left: 20),
                         child: Row(children: [
-                          Text(snapshot.data!["response"]["name"] ?? ' ',
+                          Text(
+                              widget.arguments["name"] ?? ' ',
                               overflow: TextOverflow.ellipsis,
                               textAlign: TextAlign.left,
                               style: AppStyle.txtRobotoBold24),
@@ -208,7 +203,7 @@ class _RestaurantsDetailsScreenState extends State<RestaurantsDetailsScreen>
                                       borderRadius:
                                           BorderRadiusStyle.txtRoundedBorder4),
                               child: Center(
-                                child: Text(snapshot.data!["response"]["status"] ?? ' ',
+                                child: Text(widget.arguments["status"] ?? ' ',
                                     overflow: TextOverflow.ellipsis,
                                     textAlign: TextAlign.left,
                                     style: AppStyle.txtRobotoMedium12WhiteA700),
@@ -228,7 +223,8 @@ class _RestaurantsDetailsScreenState extends State<RestaurantsDetailsScreen>
                             overflow: TextOverflow.ellipsis,
                             textAlign: TextAlign.left,
                             style: AppStyle.txtRobotoRegular16)),
-                    Padding(
+            if(widget.arguments["rating"] != null) ...[
+              Padding(
                       padding: const EdgeInsets.only(left: 20, top: 10),
                       child: Positioned(
                         right: 5,
@@ -242,7 +238,7 @@ class _RestaurantsDetailsScreenState extends State<RestaurantsDetailsScreen>
                           child: Row(
                             children: [
                               const SizedBox(width: 5),
-                               Text(snapshot.data!["response"]["rating"] ?? ' '),
+                               Text(widget.arguments["rating"] ?? ''),
                               const SizedBox(width: 5),
                               CustomImageView(svgPath: ImageConstant.imgStar),
                             ],
@@ -250,6 +246,7 @@ class _RestaurantsDetailsScreenState extends State<RestaurantsDetailsScreen>
                         ),
                       ),
                     ),
+                    ],
                     Align(
                         alignment: Alignment.center,
                         child: Padding(
@@ -259,7 +256,7 @@ class _RestaurantsDetailsScreenState extends State<RestaurantsDetailsScreen>
                                 children: [
                                   Padding(
                                       padding: getPadding(top: 2, bottom: 1),
-                                      child: Text(snapshot.data!["response"]["location"] ?? ' ',
+                                      child: Text(widget.arguments["location"] ?? '',
                                           overflow: TextOverflow.ellipsis,
                                           textAlign: TextAlign.left,
                                           style: AppStyle
@@ -292,7 +289,7 @@ class _RestaurantsDetailsScreenState extends State<RestaurantsDetailsScreen>
                                 ]))),
                     Padding(
                         padding: getPadding(left: 20, top: 4),
-                        child: Text(snapshot.data!["response"]["radius"] ?? ' ',
+                        child: Text(widget.arguments["radius"] ?? '',
                             overflow: TextOverflow.ellipsis,
                             textAlign: TextAlign.left,
                             style: AppStyle.txtRobotoRegular14)),
@@ -315,7 +312,7 @@ class _RestaurantsDetailsScreenState extends State<RestaurantsDetailsScreen>
                                       child: RichText(
                                           text: TextSpan(children: [
                                             TextSpan(
-                                                text: "${snapshot.data!["response"]["posts"].length} ",
+                                                text: "${widget.arguments?["posts"]?.length ?? 0} ",
                                                 style: TextStyle(
                                                     color:
                                                         ColorConstant.gray900,
@@ -343,7 +340,7 @@ class _RestaurantsDetailsScreenState extends State<RestaurantsDetailsScreen>
                                           child: RichText(
                                               text: TextSpan(children: [
                                                 TextSpan(
-                                                    text: "${snapshot.data!["response"]["followers"].length} ",
+                                                    text: "${widget.arguments?["followers"]?.length  ?? 0} ",
                                                     style: TextStyle(
                                                         color: ColorConstant
                                                             .gray900,
@@ -373,7 +370,7 @@ class _RestaurantsDetailsScreenState extends State<RestaurantsDetailsScreen>
                                           child: RichText(
                                               text: TextSpan(children: [
                                                 TextSpan(
-                                                    text: "${snapshot.data!["response"]["following"].length}",
+                                                    text: "${ widget.arguments?["following"]?.length ?? 0}",
                                                     style: TextStyle(
                                                         color: ColorConstant
                                                             .gray900,
@@ -461,7 +458,7 @@ class _RestaurantsDetailsScreenState extends State<RestaurantsDetailsScreen>
                                       Padding(
                                           padding: getPadding(
                                               left: 8, top: 3, bottom: 4),
-                                          child: Text(snapshot.data!["response"]["name"] ?? ' ',
+                                          child: Text(widget.arguments["name"] ?? ' ',
                                               overflow: TextOverflow.ellipsis,
                                               textAlign: TextAlign.left,
                                               style: AppStyle
@@ -503,7 +500,7 @@ class _RestaurantsDetailsScreenState extends State<RestaurantsDetailsScreen>
                                         width: getHorizontalSize(318.00),
                                         margin: getMargin(left: 1, top: 13),
                                         child: Text(
-                                             snapshot.data!["response"]["description"] ?? ' ',
+                                            widget.arguments["description"] ?? ' ',
                                                   style: TextStyle(
                                                       color:
                                                           ColorConstant.gray900,
@@ -1245,7 +1242,6 @@ class _RestaurantsDetailsScreenState extends State<RestaurantsDetailsScreen>
                                         ),
                                       ),
                                     );
-
                                     // return ListView.builder(
                                     //   shrinkWrap: true,
                                     //   physics: NeverScrollableScrollPhysics(),
@@ -1267,10 +1263,9 @@ class _RestaurantsDetailsScreenState extends State<RestaurantsDetailsScreen>
                     ),
                   )
                 ]),
-              )
-            ]);
-    }}),
-                  ),
+              ),
+               ]),
+              ),
             // sellectedSubTask == 2 &&
                 floatingActionButton: (itemList.isNotEmpty) ?
             Container(

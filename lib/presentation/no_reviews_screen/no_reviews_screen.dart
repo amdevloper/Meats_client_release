@@ -10,6 +10,8 @@ import '../../widgets/app_bar/custom_app_bar.dart';
 import '../../widgets/custom_image_view.dart';
 
 class NoReviewsScreen extends StatelessWidget {
+  const NoReviewsScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -67,13 +69,6 @@ class NoReviewsScreen extends StatelessWidget {
                               textAlign: TextAlign.center,
                               style: AppStyle.txtRobotoRegular14)),
                       Spacer(),
-                      CustomImageView(
-                          svgPath: ImageConstant.imgRectangle,
-                          height: getVerticalSize(5.00),
-                          width: getHorizontalSize(48.00),
-                          radius:
-                              BorderRadius.circular(getHorizontalSize(2.00)),
-                          margin: getMargin(bottom: 5))
                     ]))));
   }
 

@@ -180,12 +180,12 @@ class SignUpEmailErrorScreen extends StatelessWidget {
                                             overflow: TextOverflow.ellipsis,
                                             textAlign: TextAlign.left,
                                             style: AppStyle.txtRobotoMedium16)),
-                                    CustomImageView(
-                                        svgPath: ImageConstant.imgGroup17868,
-                                        height: getVerticalSize(1.00),
-                                        width: getHorizontalSize(293.00),
-                                        alignment: Alignment.topCenter,
-                                        margin: getMargin(top: 6))
+                                    // CustomImageView(
+                                    //     svgPath: ImageConstant.imgGroup17868,
+                                    //     height: getVerticalSize(1.00),
+                                    //     width: getHorizontalSize(293.00),
+                                    //     alignment: Alignment.topCenter,
+                                    //     margin: getMargin(top: 6))
                                   ])),
                           Padding(
                               padding: getPadding(top: 18, left: MediaQuery.of(context).size.width/25),
@@ -246,23 +246,7 @@ class SignUpEmailErrorScreen extends StatelessWidget {
                                             ))
                                       ])))
                         ]))),
-            bottomNavigationBar: Container(
-                margin: getMargin(left: 1),
-                padding: getPadding(left: 163, top: 8, right: 163, bottom: 8),
-                decoration: AppDecoration.fillWhiteA700
-                    .copyWith(borderRadius: BorderRadiusStyle.customBorderTL16),
-                child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      CustomImageView(
-                          svgPath: ImageConstant.imgRectangle,
-                          height: getVerticalSize(5.00),
-                          width: getHorizontalSize(48.00),
-                          radius:
-                              BorderRadius.circular(getHorizontalSize(2.00)),
-                          margin: getMargin(bottom: 3))
-                    ]))));
+        ));
   }
 
   onTapSignup(BuildContext context) {

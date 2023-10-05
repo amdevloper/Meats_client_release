@@ -249,13 +249,13 @@ class SignUpScreenDelivery extends StatelessWidget {
                                                 textAlign: TextAlign.left,
                                                 style: AppStyle
                                                     .txtRobotoMedium16Bluegray300)),
-                                        CustomImageView(
-                                            svgPath:
-                                                ImageConstant.imgGroup17868,
-                                            height: getVerticalSize(1.00),
-                                            width: getHorizontalSize(293.00),
-                                            alignment: Alignment.topCenter,
-                                            margin: getMargin(top: 6))
+                                        // CustomImageView(
+                                        //     svgPath:
+                                        //         ImageConstant.imgGroup17868,
+                                        //     height: getVerticalSize(1.00),
+                                        //     width: getHorizontalSize(293.00),
+                                        //     alignment: Alignment.topCenter,
+                                        //     margin: getMargin(top: 6))
                                       ])),
                               Padding(
                                   padding: getPadding(top: 18, left: MediaQuery.of(context).size.width/25),
@@ -309,28 +309,6 @@ class SignUpScreenDelivery extends StatelessWidget {
                                                                   .underline)),
                                             ))
                                       ])),
-                              Container(
-                                  width: size.width,
-                                  margin: getMargin(top: 57),
-                                  padding: getPadding(
-                                      left: 163, top: 8, right: 163, bottom: 8),
-                                  decoration: AppDecoration.fillWhiteA700
-                                      .copyWith(
-                                          borderRadius: BorderRadiusStyle
-                                              .customBorderTL16),
-                                  child: Column(
-                                      mainAxisSize: MainAxisSize.min,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        CustomImageView(
-                                            svgPath: ImageConstant.imgRectangle,
-                                            height: getVerticalSize(5.00),
-                                            width: getHorizontalSize(48.00),
-                                            radius: BorderRadius.circular(
-                                                getHorizontalSize(2.00)),
-                                            margin: getMargin(bottom: 3))
-                                      ]))
                             ]))))));
   }
 

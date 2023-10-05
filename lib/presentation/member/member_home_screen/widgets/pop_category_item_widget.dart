@@ -9,8 +9,11 @@ import '../../../../widgets/custom_image_view.dart';
 
 // ignore: must_be_immutable
 class PopCategoryItemWidget extends StatefulWidget {
-  VoidCallback? onTapImgImagePlaceholderOne;
-  PopCategoryItemWidget({super.key, this.onTapImgImagePlaceholderOne});
+  Function? onTapImgImagePlaceholderOne;
+  Map<String, dynamic>? listOfRestarunt;
+  final int? index;
+
+  PopCategoryItemWidget({super.key, this.onTapImgImagePlaceholderOne, this.listOfRestarunt, this.index});
 
   @override
   State<PopCategoryItemWidget> createState() => _PopCategoryItemWidgetState();
@@ -21,8 +24,7 @@ class _PopCategoryItemWidgetState extends State<PopCategoryItemWidget> {
   Widget build(BuildContext context) {
     return  GestureDetector(
       onTap: () {
-        widget.onTapImgImagePlaceholderOne!();
-        print("Hi Amit, How are you");
+        widget.onTapImgImagePlaceholderOne!(widget.listOfRestarunt);
       },
       child: Container(
         // height: 300,
@@ -54,6 +56,7 @@ class _PopCategoryItemWidgetState extends State<PopCategoryItemWidget> {
                                 Alignment.topLeft),
                           ),
                         ),
+                      if(widget.listOfRestarunt!["rating"] != null) ...[
                         Padding(
                           padding: const EdgeInsets.only(left: 10,top: 10),
                           child: Positioned(
@@ -71,7 +74,7 @@ class _PopCategoryItemWidgetState extends State<PopCategoryItemWidget> {
                               child: Row(
                                 children: [
                                   const SizedBox(width: 5),
-                                  const Text("4.5"),
+                                   Text(widget.listOfRestarunt!["rating"] ?? ''),
                                   const SizedBox(width: 5),
                                   CustomImageView(svgPath:ImageConstant.imgStar),
                                 ],
@@ -79,17 +82,19 @@ class _PopCategoryItemWidgetState extends State<PopCategoryItemWidget> {
                             ),
                           ),
                         ),
+                      ],
                       ]),
+
                   Padding(
                     padding: const EdgeInsets.only(top: 5),
-                    child: Text("McDonald's",
+                    child: Text(widget.listOfRestarunt!["name"],
                       style: AppStyle.txtRobotoMedium16Black900.copyWith(
                         color: ColorConstant.gray900,
                       ),),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 5),
-                    child: Text("15 km away",
+                    child: Text("${widget.listOfRestarunt!["radius"]} km away",
                       style: AppStyle.txtInterRegular14Bluegray300.copyWith(
                         color: ColorConstant.blueGray300,
                       ),

@@ -261,7 +261,7 @@ class _SignInScreenState extends State<SignInScreen> {
                                 margin: getMargin(top: 28),
                                 onTap: () async {
                                   // showMessageView();
-                                  if (_formKey.currentState!.validate()) {
+                                  // if (_formKey.currentState!.validate()) {
                                      // if(dropdownItemList[0].toString() == dropdownItemList[0].toString()) {
                                     //   // if(dropdownItemList[0].toString() == "Influencer") {
                                     //     Navigator.of(context).push(MaterialPageRoute(builder: (context) => ProfileSetupScreen()));
@@ -279,22 +279,22 @@ class _SignInScreenState extends State<SignInScreen> {
 
 
                                         if(data["firstLogin"] == false) {
-                                          if(data["roles"][0] == "ROLE_ESTABLISHMENT") {
-                                            Navigator.of(context).push(MaterialPageRoute(builder: (context) =>
-                                                BottomNavigationTabBar(
-                                                  arguments: dropdownItemList[0].toString(),)));
-                                          }else {
+                                          // if(data["roles"][0] == "ROLE_ESTABLISHMENT") {
+                                          //   Navigator.of(context).push(MaterialPageRoute(builder: (context) =>
+                                          //       BottomNavigationTabBar(
+                                          //         arguments: dropdownItemList[0].toString(),)));
+                                          // }else {
                                             Navigator.of(context).push(MaterialPageRoute(builder: (context) =>
                                                 BottomNavigationTabBar(
                                                   arguments: dropdownItemList[2].toString(),)));
-                                          }
+                                          // }
                                         }else {
                                           Navigator.pushNamed(context, AppRoutes.establishmentDetailsScreen);
                                         }
 
                                     // Navigator.of(context).push(MaterialPageRoute(builder: (context) => BottomNavigationTabBar(arguments: dropdownItemList[0].toString(),)));
                                     // }
-                                  }
+                                  // }
                                 },
                               ),
                               // CustomButton(
@@ -356,13 +356,13 @@ class _SignInScreenState extends State<SignInScreen> {
                                                 textAlign: TextAlign.left,
                                                 style: AppStyle
                                                     .txtRobotoMedium16Bluegray300)),
-                                        CustomImageView(
-                                            svgPath:
-                                                ImageConstant.imgGroup17868,
-                                            height: getVerticalSize(1.00),
-                                            width: getHorizontalSize(293.00),
-                                            alignment: Alignment.topCenter,
-                                            margin: getMargin(top: 7))
+                                        // CustomImageView(
+                                        //     svgPath:
+                                        //         ImageConstant.imgGroup17868,
+                                        //     height: getVerticalSize(1.00),
+                                        //     width: getHorizontalSize(293.00),
+                                        //     alignment: Alignment.topCenter,
+                                        //     margin: getMargin(top: 7))
                                       ])),
                               Padding(
                                   padding: getPadding(top: 18, left: MediaQuery.of(context).size.width/25),
@@ -567,90 +567,6 @@ class _SignInScreenState extends State<SignInScreen> {
                                                                   .underline))),
                                         )
                                       ])),
-                              Container(
-                                  height: getVerticalSize(27.00),
-                                  width: size.width,
-                                  margin: getMargin(top: 118),
-                                  child: Stack(
-                                      alignment: Alignment.topCenter,
-                                      children: [
-                                        Align(
-                                            alignment: Alignment.bottomCenter,
-                                            child: Container(
-                                                width: size.width,
-                                                padding: getPadding(
-                                                    left: 163,
-                                                    top: 8,
-                                                    right: 163,
-                                                    bottom: 8),
-                                                decoration: AppDecoration
-                                                    .fillWhiteA700
-                                                    .copyWith(
-                                                        borderRadius:
-                                                            BorderRadiusStyle
-                                                                .customBorderTL16),
-                                                child: Column(
-                                                    mainAxisSize:
-                                                        MainAxisSize.min,
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .center,
-                                                    children: [
-                                                      CustomImageView(
-                                                          svgPath: ImageConstant
-                                                              .imgRectangle,
-                                                          height:
-                                                              getVerticalSize(
-                                                                  5.00),
-                                                          width:
-                                                              getHorizontalSize(
-                                                                  48.00),
-                                                          radius: BorderRadius
-                                                              .circular(
-                                                                  getHorizontalSize(
-                                                                      2.00)),
-                                                          margin: getMargin(
-                                                              bottom: 3))
-                                                    ]))),
-                                        Align(
-                                            alignment: Alignment.topCenter,
-                                            child: Container(
-                                                width: size.width,
-                                                padding: getPadding(
-                                                    left: 163,
-                                                    top: 8,
-                                                    right: 163,
-                                                    bottom: 8),
-                                                decoration: AppDecoration
-                                                    .fillWhiteA700
-                                                    .copyWith(
-                                                        borderRadius:
-                                                            BorderRadiusStyle
-                                                                .customBorderTL16),
-                                                child: Column(
-                                                    mainAxisSize:
-                                                        MainAxisSize.min,
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .center,
-                                                    children: [
-                                                      // CustomImageView(
-                                                      //     svgPath: ImageConstant
-                                                      //         .imgRectangle,
-                                                      //     height:
-                                                      //         getVerticalSize(
-                                                      //             5.00),
-                                                      //     width:
-                                                      //         getHorizontalSize(
-                                                      //             48.00),
-                                                      //     radius: BorderRadius
-                                                      //         .circular(
-                                                      //             getHorizontalSize(
-                                                      //                 2.00)),
-                                                      //     margin: getMargin(
-                                                      //         bottom: 3))
-                                                    ])))
-                                      ]))
                             ]))))));
   }
 
@@ -662,8 +578,8 @@ class _SignInScreenState extends State<SignInScreen> {
         'Content-Type': 'application/json; charset=UTF-8',
       },
       body: jsonEncode({
-        "email" : emailController.value.text,
-        "password" : controlsTextOneController.value.text,
+        "email" : "172121dda@gmail.com",
+        "password" : "Password",
       }),
     );
     if (response.statusCode == 200) {

@@ -8,8 +8,11 @@ import 'core/utils/image_constant.dart';
 import 'core/utils/size_utils.dart';
 
 class RestaurantListView extends StatefulWidget {
-  VoidCallback? onTapImgImagePlaceholderOne;
-   RestaurantListView({super.key, this.onTapImgImagePlaceholderOne});
+  Map<String, dynamic>? listOfRestarunt;
+  final int? index;
+
+  Function? onTapImgImagePlaceholderOne;
+   RestaurantListView({super.key, this.onTapImgImagePlaceholderOne,this.index, this.listOfRestarunt});
 
   @override
   State<RestaurantListView> createState() => _RestaurantListViewState();
@@ -20,7 +23,7 @@ class _RestaurantListViewState extends State<RestaurantListView> {
   Widget build(BuildContext context) {
     return  GestureDetector(
       onTap: () {
-         widget.onTapImgImagePlaceholderOne!();
+         widget.onTapImgImagePlaceholderOne!(widget.listOfRestarunt);
         print("Hi Amit, How are you");
       },
       child: Container(
@@ -82,14 +85,14 @@ class _RestaurantListViewState extends State<RestaurantListView> {
                 ]),
             Padding(
               padding: const EdgeInsets.only(top: 5),
-              child: Text("McDonald's",
+              child: Text(widget.listOfRestarunt!["name"],
                 style: AppStyle.txtRobotoBold18Black9001.copyWith(
                   color: ColorConstant.gray900,
                 ),),
             ),
             Padding(
               padding: const EdgeInsets.only(top: 5),
-              child: Text("Burger, Fast Food, Beverages",
+              child: Text(widget.listOfRestarunt!["description"],
                 style: AppStyle.txtInterRegular14Bluegray300.copyWith(
                   color: ColorConstant.blueGray300,
                 ),

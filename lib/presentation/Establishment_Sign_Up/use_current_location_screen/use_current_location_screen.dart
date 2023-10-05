@@ -113,40 +113,6 @@ class UseCurrentLocationScreen extends StatelessWidget {
                                         alignment: Alignment.bottomCenter,
                                         child: Container(
                                             width: size.width,
-                                            padding: getPadding(
-                                                left: 163,
-                                                top: 8,
-                                                right: 163,
-                                                bottom: 8),
-                                            decoration: AppDecoration
-                                                .fillWhiteA700
-                                                .copyWith(
-                                                    borderRadius:
-                                                        BorderRadiusStyle
-                                                            .customBorderTL16),
-                                            child: Column(
-                                                mainAxisSize: MainAxisSize.min,
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: [
-                                                  CustomImageView(
-                                                      svgPath: ImageConstant
-                                                          .imgRectangle,
-                                                      height:
-                                                          getVerticalSize(5.00),
-                                                      width: getHorizontalSize(
-                                                          48.00),
-                                                      radius:
-                                                          BorderRadius.circular(
-                                                              getHorizontalSize(
-                                                                  2.00)),
-                                                      margin:
-                                                          getMargin(bottom: 3))
-                                                ]))),
-                                    Align(
-                                        alignment: Alignment.bottomCenter,
-                                        child: Container(
-                                            width: size.width,
                                             decoration: AppDecoration
                                                 .fillWhiteA700
                                                 .copyWith(
@@ -252,47 +218,6 @@ class UseCurrentLocationScreen extends StatelessWidget {
                                                           getMargin(top: 30),
                                                       onTap: () => onTapConfirm(
                                                           context)),
-                                                  Container(
-                                                      width: size.width,
-                                                      margin:
-                                                          getMargin(top: 30),
-                                                      padding: getPadding(
-                                                          left: 163,
-                                                          top: 8,
-                                                          right: 163,
-                                                          bottom: 8),
-                                                      decoration: AppDecoration
-                                                          .fillWhiteA700
-                                                          .copyWith(
-                                                              borderRadius:
-                                                                  BorderRadiusStyle
-                                                                      .customBorderTL16),
-                                                      child: Column(
-                                                          mainAxisSize:
-                                                              MainAxisSize.min,
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .center,
-                                                          children: [
-                                                            CustomImageView(
-                                                                svgPath:
-                                                                    ImageConstant
-                                                                        .imgRectangle,
-                                                                height:
-                                                                    getVerticalSize(
-                                                                        5.00),
-                                                                width:
-                                                                    getHorizontalSize(
-                                                                        48.00),
-                                                                radius: BorderRadius
-                                                                    .circular(
-                                                                        getHorizontalSize(
-                                                                            2.00)),
-                                                                margin:
-                                                                    getMargin(
-                                                                        bottom:
-                                                                            3))
-                                                          ]))
                                                 ])))
                                   ]))))
                 ]))));

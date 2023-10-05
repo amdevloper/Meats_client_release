@@ -594,31 +594,6 @@ class EstablishmentLocationDetails1Screen extends StatelessWidget {
                                                           top: 4, bottom: 4))
                                                 ]))
                                       ]))),
-                          Align(
-                              alignment: Alignment.bottomLeft,
-                              child: Container(
-                                  margin: getMargin(bottom: 195),
-                                  padding: getPadding(
-                                      left: 132, top: 8, right: 132, bottom: 8),
-                                  decoration: AppDecoration.fillWhiteA700
-                                      .copyWith(
-                                          borderRadius: BorderRadiusStyle
-                                              .customBorderTL16),
-                                  child: Column(
-                                      mainAxisSize: MainAxisSize.min,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        CustomImageView(
-                                            svgPath: ImageConstant.imgRectangle,
-                                            height: getVerticalSize(5.00),
-                                            width: getHorizontalSize(48.00),
-                                            radius: BorderRadius.circular(
-                                                getHorizontalSize(2.00)),
-                                            margin: getMargin(bottom: 3))
-                                      ])))
                         ]))))));
   }
 

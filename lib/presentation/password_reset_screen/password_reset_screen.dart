@@ -82,51 +82,7 @@ class PasswordResetScreen extends StatelessWidget {
                               margin: getMargin(top: 30, bottom: 5),
                               onTap: () => onTapReset(context))
                         ]))),
-            bottomNavigationBar: Container(
-                height: getVerticalSize(24.00),
-                width: size.width,
-                child: Stack(alignment: Alignment.center, children: [
-                  Align(
-                      alignment: Alignment.center,
-                      child: Container(
-                          width: size.width,
-                          padding: getPadding(
-                              left: 163, top: 8, right: 163, bottom: 8),
-                          decoration: AppDecoration.fillWhiteA700.copyWith(
-                              borderRadius: BorderRadiusStyle.customBorderTL16),
-                          child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                CustomImageView(
-                                    svgPath: ImageConstant.imgRectangle,
-                                    height: getVerticalSize(5.00),
-                                    width: getHorizontalSize(48.00),
-                                    radius: BorderRadius.circular(
-                                        getHorizontalSize(2.00)),
-                                    margin: getMargin(bottom: 3))
-                              ]))),
-                  Align(
-                      alignment: Alignment.center,
-                      child: Container(
-                          width: size.width,
-                          padding: getPadding(
-                              left: 163, top: 8, right: 163, bottom: 8),
-                          decoration: AppDecoration.fillWhiteA700.copyWith(
-                              borderRadius: BorderRadiusStyle.customBorderTL16),
-                          child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                CustomImageView(
-                                    svgPath: ImageConstant.imgRectangle,
-                                    height: getVerticalSize(5.00),
-                                    width: getHorizontalSize(48.00),
-                                    radius: BorderRadius.circular(
-                                        getHorizontalSize(2.00)),
-                                    margin: getMargin(bottom: 3))
-                              ])))
-                ]))));
+        ));
   }
 
   onTapReset(BuildContext context) {
