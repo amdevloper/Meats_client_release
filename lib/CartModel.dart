@@ -1,5 +1,6 @@
-import 'package:Meats/ItemsAfterModel.dart';
 import 'package:objectbox/objectbox.dart';
+
+import 'ItemsAfterModel.dart';
 
 @Entity()
 class CartModel {

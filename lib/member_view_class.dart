@@ -1,17 +1,16 @@
 import 'dart:convert';
 
-import 'package:Meats/presentation/lates_offer_list.dart';
-import 'package:Meats/presentation/member/item_by_restaurant.dart';
-import 'package:Meats/presentation/member/member_home_screen/widgets/category_item_widget.dart';
-import 'package:Meats/presentation/member/member_home_screen/widgets/latest_category_item_widget.dart';
-import 'package:Meats/presentation/member/member_home_screen/widgets/pop_category_item_widget.dart';
-import 'package:Meats/presentation/member/member_home_screen/widgets/slider_one_item_widget.dart';
-import 'package:Meats/presentation/member/restaurants_screen/restaurants_screen.dart';
-import 'package:Meats/presentation/restaurants_details_screen/restaurants_details_screen.dart';
-import 'package:Meats/routes/app_routes.dart';
-import 'package:Meats/theme/app_style.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:meats/presentation/lates_offer_list.dart';
+import 'package:meats/presentation/member/item_by_restaurant.dart';
+import 'package:meats/presentation/member/member_home_screen/widgets/category_item_widget.dart';
+import 'package:meats/presentation/member/member_home_screen/widgets/pop_category_item_widget.dart';
+import 'package:meats/presentation/member/member_home_screen/widgets/slider_one_item_widget.dart';
+import 'package:meats/presentation/member/restaurants_screen/restaurants_screen.dart';
+import 'package:meats/presentation/restaurants_details_screen/restaurants_details_screen.dart';
+import 'package:meats/routes/app_routes.dart';
+import 'package:meats/theme/app_style.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 

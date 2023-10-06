@@ -1,7 +1,6 @@
-import 'package:Meats/ItemsAfterModel.dart';
-import 'package:Meats/ItemsBeforeModel.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../ItemsAfterModel.dart';
 import '../../../../core/utils/color_constant.dart';
 import '../../../../core/utils/image_constant.dart';
 import '../../../../core/utils/size_utils.dart';

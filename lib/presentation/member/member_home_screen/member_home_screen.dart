@@ -1,13 +1,6 @@
-import 'package:Meats/presentation/member/member_home_screen/widgets/category_item_widget.dart';
-import 'package:Meats/presentation/member/member_home_screen/widgets/latest_category_item_widget.dart';
-import 'package:Meats/presentation/member/member_home_screen/widgets/listmcdonalds_item_widget.dart';
-import 'package:Meats/presentation/member/member_home_screen/widgets/listmcdonalds_one_item_widget.dart';
-import 'package:Meats/presentation/member/member_home_screen/widgets/listtime_item_widget.dart';
-import 'package:Meats/presentation/member/member_home_screen/widgets/pop_category_item_widget.dart';
-import 'package:Meats/presentation/member/member_home_screen/widgets/slider_item_widget.dart';
-import 'package:Meats/presentation/member/member_home_screen/widgets/slider_one_item_widget.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:meats/presentation/member/member_home_screen/widgets/slider_one_item_widget.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../../../core/utils/color_constant.dart';
