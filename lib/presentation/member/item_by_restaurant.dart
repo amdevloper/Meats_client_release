@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:Meats/presentation/restaurants_details_screen/restaurants_details_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../core/utils/color_constant.dart';
@@ -22,6 +21,7 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 // ignore_for_file: must_be_immutable
 import 'package:http/http.dart' as http;
 
+import '../restaurants_details_screen/restaurants_details_screen.dart';
 import 'member_home_screen/widgets/slider_one_item_widget.dart';
 
 

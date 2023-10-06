@@ -1,7 +1,5 @@
 import 'dart:convert';
 
-import 'package:Meats/ItemsBeforeModel.dart';
-import 'package:Meats/main.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:path/path.dart' as p;
@@ -9,6 +7,7 @@ import 'package:path/path.dart' as p;
 import '../../../core/utils/color_constant.dart';
 import '../../../core/utils/image_constant.dart';
 import '../../../core/utils/size_utils.dart';
+import '../../../main.dart';
 import '../../../object_box.dart';
 import '../../../theme/app_decoration.dart';
 import '../../../theme/app_style.dart';

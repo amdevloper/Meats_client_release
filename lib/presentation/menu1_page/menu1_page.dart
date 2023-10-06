@@ -1,7 +1,5 @@
 import 'dart:convert';
 
-import 'package:Meats/presentation/restaurants_all_details_screen/restaurants_all_details_screen.dart';
-import 'package:Meats/presentation/restaurants_edit_screen/restaurants_edit_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../core/utils/color_constant.dart';
@@ -20,6 +18,9 @@ import 'package:flutter/material.dart';
 import 'package:lite_rolling_switch/lite_rolling_switch.dart';
 
 import 'package:http/http.dart' as http;
+
+import '../restaurants_all_details_screen/restaurants_all_details_screen.dart';
+import '../restaurants_edit_screen/restaurants_edit_screen.dart';
 
 class Menu1Page extends StatefulWidget {
   const Menu1Page({Key? key}) : super(key: key);

@@ -1,6 +1,5 @@
-import 'package:Meats/presentation/search_dish_screen/search_dish_screen.dart';
-import 'package:Meats/presentation/search_dish_screen/widgets/listpizza_item_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:meats/presentation/search_dish_screen/search_dish_screen.dart';
 import '../../../../presentation/social_home_page/social_home_page.dart';
 
 import '../core/utils/image_constant.dart';

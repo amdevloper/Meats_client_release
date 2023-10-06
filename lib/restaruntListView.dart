@@ -1,7 +1,7 @@
-import 'package:Meats/theme/app_decoration.dart';
-import 'package:Meats/theme/app_style.dart';
-import 'package:Meats/widgets/custom_image_view.dart';
 import 'package:flutter/material.dart';
+import 'package:meats/theme/app_decoration.dart';
+import 'package:meats/theme/app_style.dart';
+import 'package:meats/widgets/custom_image_view.dart';
 
 import 'core/utils/color_constant.dart';
 import 'core/utils/image_constant.dart';
