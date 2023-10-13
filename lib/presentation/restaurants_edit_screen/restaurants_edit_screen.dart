@@ -1,6 +1,9 @@
+import 'dart:convert';
+
 import 'package:country_pickers/country.dart';
 import 'package:country_pickers/utils/utils.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../core/utils/color_constant.dart';
 import '../../core/utils/image_constant.dart';
@@ -21,6 +24,7 @@ import '../restaurants_edit_screen/widgets/listtext_three1_item_widget.dart';
 import 'package:flutter/material.dart';
 import '../../../widgets/custom_phone_number.dart';
 import 'dart:io';
+import 'package:http/http.dart' as http;
 
 // ignore_for_file: must_be_immutable
 
@@ -53,6 +57,7 @@ class _RestaurantsEditScreenState extends State<RestaurantsEditScreen> {
   TextEditingController phoneNumberController = TextEditingController();
   TextEditingController cusiniesController = TextEditingController();
 
+   int lastCusionsCouint = 0;
 
   final SliverGridDelegate delegate =
   SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, childAspectRatio:4);
@@ -92,34 +97,78 @@ class _RestaurantsEditScreenState extends State<RestaurantsEditScreen> {
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   List <CheckBoxModel> _checkBoxList = <CheckBoxModel>[];
 
+  var cusineData;
+
+
+  Future<Map<String, dynamic>> cusineDataFunction() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? token = prefs.getString('token');
+    int? userId = prefs.getInt('restarantId');
+    // try {
+    var request = http.Request(
+      'GET',
+      Uri.parse(
+          "http://ec2-34-227-30-202.compute-1.amazonaws.com/api/get/cuisine"),
+    )..headers.addAll({
+      'Content-Type': 'application/json',
+      'Authorization': token!,
+    });
+
+    http.StreamedResponse response = await request.send();
+    Map<String, dynamic> object =
+    await json.decode(await response.stream.bytesToString());
+    return object;
+  }
+
 
   @override
   void initState() {
     imagePicker = ImagePicker();
 
+    Future.delayed(Duration.zero, () async {
+      // itemList = objectBox.getItemList();
+      // print("item list will show $itemList");
+       await cusineDataFunction().then((value) {
+        for (var el in value["cuisines"])
+        {
+          if(widget.arguments[0]["cuisine"][0] == el['id']) {
+            _checkBoxList.add(
+              CheckBoxModel(id: 1, name: "South Indian", selected: false),
+            // el["cuisine"]
+                );
+            setState(() {
+            });
+          }
+        }
+
+      });
+    });
+
+
     // TODO: implement initState
-    controlsTextController.text = widget.arguments['name'];
-    milesTextController.text =  widget.arguments['radius'];
-    phoneNumberController.text = widget.arguments['phoneNumber'];
-    descriptionController.text =   widget.arguments['description'];
-     for(var image in widget.arguments['image']) {
+    controlsTextController.text = widget.arguments[0]['name'];
+    milesTextController.text =  widget.arguments[0]['radius'];
+    phoneNumberController.text = widget.arguments[0]['phoneNumber'];
+    descriptionController.text =   widget.arguments[0]['description'];
+     for(var image in widget.arguments[0]['image']) {
       imagesV.addAll(image);
      }
     emailController.text = 'lapinos@gmail.com';
-    _checkBoxList.addAll(
-        {
-          CheckBoxModel(id: 1, name: "South Indian", selected: false),
-          CheckBoxModel(id: 2, name: "Pizza", selected: false),
-          CheckBoxModel(id: 3, name: "Desert", selected: false),
-          CheckBoxModel(id: 4, name: "Fast Food", selected: false),
-          CheckBoxModel(id: 5, name: "Gujarati Food", selected: false),
-          CheckBoxModel(id: 6, name: "Dessert", selected: false),
-          CheckBoxModel(id: 7, name: "Chinese Food", selected: false),
-          // CheckBoxModel(id: 8, name: "Pet Supplies", selected: false),
-          CheckBoxModel(id: 9, name: "Thai Food ", selected: false),
-          // CheckBoxModel(id: 10, name: "Retails", selected: false),
-          // CheckBoxModel(id: 11, name: "Specialty Foods", selected: false),
-        });
+
+      // _checkBoxList.addAll(
+      //   {
+      //      CheckBoxModel(id: 1, name: "South Indian", selected: false),
+      //     // CheckBoxModel(id: 2, name: "Pizza", selected: false),
+      //     // CheckBoxModel(id: 3, name: "Desert", selected: false),
+      //     // CheckBoxModel(id: 4, name: "Fast Food", selected: false),
+      //     // CheckBoxModel(id: 5, name: "Gujarati Food", selected: false),
+      //     // CheckBoxModel(id: 6, name: "Dessert", selected: false),
+      //     // CheckBoxModel(id: 7, name: "Chinese Food", selected: false),
+      //     // // CheckBoxModel(id: 8, name: "Pet Supplies", selected: false),
+      //     // CheckBoxModel(id: 9, name: "Thai Food ", selected: false),
+      //     // CheckBoxModel(id: 10, name: "Retails", selected: false),
+      //     // CheckBoxModel(id: 11, name: "Specialty Foods", selected: false),
+      //   });
 
     super.initState();
   }
@@ -254,10 +303,10 @@ class _RestaurantsEditScreenState extends State<RestaurantsEditScreen> {
 
                               Container(
                                 padding: EdgeInsets.only(left: 15, top: 0, bottom: 5),
-                                height: MediaQuery.of(context).size.height/4.5,
+                                height: MediaQuery.of(context).size.height/ (_checkBoxList.isNotEmpty ? _checkBoxList.length.isEven ? _checkBoxList.length + 5 : (_checkBoxList.length - 1) + 5 : 60),
                                 width: MediaQuery.of(context).size.width,
                                 child: GridView.count(
-                                    physics: NeverScrollableScrollPhysics(),
+                                    // physics: NeverScrollableScrollPhysics(),
                                     childAspectRatio: 4,
                                     crossAxisCount: 2,
                                     children: List.generate(_checkBoxList.length, (index) {
@@ -627,7 +676,18 @@ class _RestaurantsEditScreenState extends State<RestaurantsEditScreen> {
               TextButton(
                 onPressed: ()
                 {
-                  Navigator.of(context).pop();
+                  createCuisines(cusiniesController.text).then((value) {
+                    _checkBoxList.add(
+                      CheckBoxModel(
+                          id: value["cuisine"]["id"], name: value["cuisine"]["cuisine"], selected: false),
+                    );
+
+                    Navigator.of(context).pop();
+                    cusiniesController.text = '';
+                    setState(() {
+
+                    });
+                  });
                 },
                 child: const Text("Submit"),
               ),
@@ -636,6 +696,25 @@ class _RestaurantsEditScreenState extends State<RestaurantsEditScreen> {
         });
 
   }
+
+
+  Future<Map<dynamic, dynamic>> createCuisines(String value) async {
+    final response = await http.post(
+      Uri.parse('http://ec2-34-227-30-202.compute-1.amazonaws.com/api/add/cuisine'),
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode({
+        "cuisine" : value,
+      }),
+    );
+    if (response.statusCode == 200) {
+      return jsonDecode(response.body);
+    } else {
+      throw Exception('Failed to signIn');
+    }
+  }
+
 
 
   imageRemove(value) {

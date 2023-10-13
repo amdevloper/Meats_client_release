@@ -1766,7 +1766,6 @@ class _EstablishmentDetailsScreenState
     }
   }
 
-
   int getRandomInt() {
     Random random = new Random();
     int randomNumber = random.nextInt(10000);

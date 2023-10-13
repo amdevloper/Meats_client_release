@@ -282,7 +282,7 @@ class _MemberViewClassState extends State<MemberViewClass> {
                                               .txtRobotoRegular14Gray60001)))
                             ])),
                     Container(
-                        height: getVerticalSize(186.00),
+                        height: getVerticalSize(187.00),
                         child: ListView.separated(
                             padding: getPadding(left: 11, top: 11),
                             scrollDirection: Axis.horizontal,

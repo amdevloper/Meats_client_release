@@ -126,7 +126,7 @@ class ImageConstant {
 
   static String imgShare = 'assets/images/img_share.svg';
 
-  static String imgImageplaceholder = 'assets/images/img_imageplaceholder.png';
+  static String imgImageplaceholder = 'assets/images/img_imageplaceholder_1.png';
 
   static String imgArrowdownGray900 =
       'assets/images/img_arrowdown_gray_900.svg';

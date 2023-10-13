@@ -510,7 +510,7 @@ class AppRoutes {
     galleryFullViewScreen: (context) => GalleryFullViewScreen(),
     restaurantsAllDetailsScreen: (context) => RestaurantsAllDetailsScreen(arguments: ModalRoute.of(context)?.settings.arguments,),
     restaurantsEditScreen: (context) => RestaurantsEditScreen(arguments: ModalRoute.of(context)?.settings.arguments,),
-    menuItemAdd1Screen: (context) => const MenuItemAdd1Screen(),
+    menuItemAdd1Screen: (context) => MenuItemAdd1Screen(arguments: ModalRoute.of(context)?.settings.arguments,),
     imageUploadScreen: (context) => ImageUploadScreen(),
     orderCompletedDetailsScreen: (context) => OrderCompletedDetailsScreen(arguments: ModalRoute.of(context)?.settings.arguments,),
     orderRejectedDetailsScreen: (context) => OrderRejectedDetailsScreen(),

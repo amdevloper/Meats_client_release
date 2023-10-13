@@ -118,34 +118,34 @@ class _ListestablishmentPostItemWidgetState extends State<ListestablishmentPostI
                 style: TextStyle(color: ColorConstant.gray900)),
           ),
         ),
-        Align(
-            alignment: Alignment.centerLeft,
-            child: Container(
-                width: getHorizontalSize(319.00),
-                margin: getMargin(left: 18, top: 5),
-                child: RichText(
-                    text: TextSpan(children: [
-                      TextSpan(
-                          text:
-                          "Download App now: ",
-                          style: TextStyle(
-                              color:
-                              ColorConstant.gray900,
-                              fontSize: getFontSize(12),
-                              fontFamily: 'Roboto',
-                              fontWeight:
-                              FontWeight.w400)),
-                      TextSpan(
-                          text: "https://rb.gy/hdotmb",
-                          style: TextStyle(
-                              color:
-                              ColorConstant.indigo900,
-                              fontSize: getFontSize(12),
-                              fontFamily: 'Roboto',
-                              fontWeight:
-                              FontWeight.w400))
-                    ]),
-                    textAlign: TextAlign.left))),
+        // Align(
+        //     alignment: Alignment.centerLeft,
+        //     child: Container(
+        //         width: getHorizontalSize(319.00),
+        //         margin: getMargin(left: 18, top: 5),
+        //         child: RichText(
+        //             text: TextSpan(children: [
+        //               TextSpan(
+        //                   text:
+        //                   "Download App now: ",
+        //                   style: TextStyle(
+        //                       color:
+        //                       ColorConstant.gray900,
+        //                       fontSize: getFontSize(12),
+        //                       fontFamily: 'Roboto',
+        //                       fontWeight:
+        //                       FontWeight.w400)),
+        //               TextSpan(
+        //                   text: "https://rb.gy/hdotmb",
+        //                   style: TextStyle(
+        //                       color:
+        //                       ColorConstant.indigo900,
+        //                       fontSize: getFontSize(12),
+        //                       fontFamily: 'Roboto',
+        //                       fontWeight:
+        //                       FontWeight.w400))
+        //             ]),
+        //             textAlign: TextAlign.left))),
         Padding(
             padding:
             getPadding(left: 18, top: 8, right: 21),
@@ -161,7 +161,7 @@ class _ListestablishmentPostItemWidgetState extends State<ListestablishmentPostI
                       child: RichText(
                           text: TextSpan(children: [
                             TextSpan(
-                                text: "50",
+                                text: widget.listItemArray!["likes"] ?? "0",
                                 style: TextStyle(
                                     color: ColorConstant
                                         .gray900,
@@ -198,7 +198,7 @@ class _ListestablishmentPostItemWidgetState extends State<ListestablishmentPostI
                       child: RichText(
                           text: TextSpan(children: [
                             TextSpan(
-                                text: "12",
+                                text: widget.listItemArray!["comments"] ?? "0",
                                 style: TextStyle(
                                     color: ColorConstant
                                         .gray900,

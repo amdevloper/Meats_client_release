@@ -12,7 +12,8 @@ import '../../../widgets/custom_switch.dart';
 class Listrectangle4322OneItemWidget extends StatefulWidget {
   final int? index;
   final dynamic listValues;
-  const Listrectangle4322OneItemWidget({super.key, this.index, this.listValues});
+  Function? onClick;
+   Listrectangle4322OneItemWidget({super.key, this.index, this.listValues, this.onClick});
 
   @override
   State<Listrectangle4322OneItemWidget> createState() => _Listrectangle4322OneItemWidgetState();
@@ -150,20 +151,28 @@ class _Listrectangle4322OneItemWidgetState extends State<Listrectangle4322OneIte
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        // Align(
-                        //   alignment: Alignment.centerRight,
-                        //   child: Padding(
-                        //     padding: getPadding(
-                        //       right: 27,
-                        //     ),
-                        //     child: Text(
-                        //       "Edit",
-                        //       overflow: TextOverflow.ellipsis,
-                        //       textAlign: TextAlign.left,
-                        //       style: AppStyle.txtRobotoMedium16Gray900,
-                        //     ),
-                        //   ),
-                        // ),
+                        Padding(
+                          padding: EdgeInsets.only(left: size.width / 1.65),
+                          child: Align(
+                            alignment: Alignment.centerRight,
+                            child: Padding(
+                              padding: getPadding(
+                                right: 27,
+                              ),
+                              child: GestureDetector(
+                                onTap: () {
+                                  widget.onClick!(widget.listValues);
+                                },
+                                child: Text(
+                                  "Edit",
+                                  overflow: TextOverflow.ellipsis,
+                                  textAlign: TextAlign.left,
+                                  style: AppStyle.txtRobotoMedium16Gray900,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
                         Text(
                           widget.listValues!["name"] ?? '',
                           overflow: TextOverflow.ellipsis,
@@ -263,7 +272,7 @@ class _Listrectangle4322OneItemWidgetState extends State<Listrectangle4322OneIte
                               ),
                               Padding(
                                 padding: getPadding(
-                                  left: 144,
+                                  left: size.width/2.2,
                                 ),
                                 child: Text(
                                   "In Stock",

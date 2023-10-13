@@ -1,7 +1,13 @@
+import 'dart:convert';
+import 'dart:math';
+
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:io';
 
+import '../../../ItemsAfterModel.dart';
 import '../../../core/utils/color_constant.dart';
 import '../../../core/utils/image_constant.dart';
 import '../../../core/utils/size_utils.dart';
@@ -16,6 +22,10 @@ import '../../../widgets/custom_drop_down.dart';
 import '../../../widgets/custom_image_view.dart';
 import '../../../widgets/custom_radio_button.dart';
 import '../../../widgets/custom_text_form_field.dart';
+import 'package:http/http.dart' as http;
+import 'package:path/path.dart' as p;
+
+
 // ignore_for_file: must_be_immutable
 
 // ignore_for_file: must_be_immutable
@@ -42,7 +52,8 @@ import '../../../widgets/custom_text_form_field.dart';
 
 
 class MenuItemAdd1Screen extends StatefulWidget {
-  const MenuItemAdd1Screen({Key? key}) : super(key: key);
+  final dynamic arguments;
+  const MenuItemAdd1Screen({Key? key, this.arguments}) : super(key: key);
 
   @override
   State<MenuItemAdd1Screen> createState() => _MenuItemAdd1ScreenState();
@@ -60,9 +71,14 @@ class _MenuItemAdd1ScreenState extends State<MenuItemAdd1Screen> {
     "Delivery"
   ];
 
+  List<ItemsAfterModel> itemList = <ItemsAfterModel>[];
+
+
   Map<String, dynamic> ingradientsMap = {};
 
   TextEditingController controlsTextOneController = TextEditingController();
+
+  TextEditingController nameTextOneController = TextEditingController();
 
   TextEditingController controlsTextTwoController = TextEditingController();
 
@@ -107,6 +123,13 @@ class _MenuItemAdd1ScreenState extends State<MenuItemAdd1Screen> {
 void initState() {
     // TODO: implement initState
   imagePicker = new ImagePicker();
+  if(widget.arguments[0].isNotEmpty) {
+    controlsTextOneController.text = widget.arguments[0]["category"];
+    nameTextOneController.text = widget.arguments[0]["name"];
+    controlsTextTwoController.text = widget.arguments[0]["about"];
+    itemOriginalPriceController.text = widget.arguments[0]["originalPrice"];
+    itemDiscountPriceController.text = widget.arguments[0]["discountPrice"];
+  }
   super.initState();
   }
 
@@ -119,7 +142,7 @@ void initState() {
             backgroundColor: ColorConstant.whiteA700,
             resizeToAvoidBottomInset: false,
             appBar: CustomAppBar(
-                height: getVerticalSize(50.00),
+                height: getVerticalSize(44.00),
                 centerTitle: true,
                 title: Container(
                     width: size.width,
@@ -317,12 +340,14 @@ void initState() {
                                   focusNode: FocusNode(),
                                   controller: controlsTextOneController,
                                   hintText: "Item category",
+                                  labelText: widget.arguments[1] == "edit" ? controlsTextOneController.text : null,
                                   margin: getMargin(top: 20),
                                   alignment: Alignment.center),
                               CustomTextFormField(
                                   width: 335,
                                   focusNode: FocusNode(),
-                                  controller: controlsTextOneController,
+                                  controller: nameTextOneController,
+                                  labelText: widget.arguments[1] == "edit" ? nameTextOneController.text : null,
                                   hintText: "Item name",
                                   margin: getMargin(top: 20),
                                   alignment: Alignment.center),
@@ -330,6 +355,7 @@ void initState() {
                                   width: 335,
                                   focusNode: FocusNode(),
                                   controller: controlsTextTwoController,
+                                  labelText: widget.arguments[1] == "edit" ? controlsTextTwoController.text : null,
                                   hintText: "About item",
                                   margin: getMargin(top: 20),
                                   padding: TextFormFieldPadding.PaddingAll17,
@@ -359,8 +385,9 @@ void initState() {
                                                 width: 200,
                                                 focusNode: FocusNode(),
                                                 controller:
-                                                itemDiscountPriceController,
+                                                itemOriginalPriceController,
                                                 hintText: "Item original price",
+                                                labelText: widget.arguments[1] == "edit" ? itemOriginalPriceController.text : null,
                                                 // margin: getMargin(
                                                 //     top: 20,
                                                 //     right: 2),
@@ -419,6 +446,7 @@ void initState() {
                                                 focusNode: FocusNode(),
                                                 controller:
                                                 itemDiscountPriceController,
+                                                labelText: widget.arguments[1] == "edit" ? itemDiscountPriceController.text : null,
                                                 hintText: "Item discount price",
                                                 // margin: getMargin(
                                                 //     top: 20,
@@ -711,27 +739,27 @@ void initState() {
                                                         value;
                                                   });
                                                 })),
-                                        Align(
-                                            alignment: Alignment
-                                                .centerRight,
-                                            child:
-                                            CustomCheckbox(
-                                                alignment:
-                                                Alignment
-                                                    .centerRight,
-                                                text:
-                                                "Customization",
-                                                iconSize:
-                                                24,
-                                                value:
-                                                checkbox2,
-                                                onChange:
-                                                    (value) {
-                                                  setState(() {
-                                                    checkbox2 =
-                                                        value;
-                                                  });
-                                                }))
+                                        // Align(
+                                        //     alignment: Alignment
+                                        //         .centerRight,
+                                        //     child:
+                                        //     CustomCheckbox(
+                                        //         alignment:
+                                        //         Alignment
+                                        //             .centerRight,
+                                        //         text:
+                                        //         "Customization",
+                                        //         iconSize:
+                                        //         24,
+                                        //         value:
+                                        //         checkbox2,
+                                        //         onChange:
+                                        //             (value) {
+                                        //           setState(() {
+                                        //             checkbox2 =
+                                        //                 value;
+                                        //           });
+                                        //         }))
                                       ])),
 
 
@@ -1152,9 +1180,123 @@ void initState() {
                                   text: "Add Item",
                                   margin: getMargin(top: 20,bottom: 30),
                                   padding: ButtonPadding.PaddingAll16,
-                                  alignment: Alignment.center)
+                                  alignment: Alignment.center,
+                                onTap: () async {
+                                  var imageUrl;
+                                  if (_image != null) {
+                                    imageUrl = await sendFile();
+                                  }
+                                  if(widget.arguments[1] == "add") {
+                                    await createdEstablishmentAddItems(
+                                        imageUrl);
+                                  }else {
+                                   await createdUpdatedAddItems(imageUrl);
+                                  }
+                              },)
                             ]))))));
   }
+
+  Future<dynamic> sendFile() async {
+    Dio dio = Dio();
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? token = prefs.getString('token');
+    String fileExtension = p.extension(_image.path);
+
+    var len = await _image.length();
+    var formData = FormData.fromMap(
+        {'file': _image.readAsBytesSync(), 'type': fileExtension});
+    var response = await dio.put(
+        "http://ec2-34-227-30-202.compute-1.amazonaws.com/api/upload/",
+        data: formData,
+        options: Options(headers: {
+          Headers.contentLengthHeader: len,
+          'Authorization': token!
+        } // set content-length
+        ));
+    return response;
+  }
+
+
+  Future<dynamic> createdUpdatedAddItems(itemList) async {
+
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? token = prefs.getString('token');
+    int? userId = prefs.getInt('restarantId');
+
+    final response = await http.post(
+      Uri.parse('http://ec2-34-227-30-202.compute-1.amazonaws.com/api/update/menu'),
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': token!,
+      },
+
+      body: jsonEncode(<dynamic,dynamic>{
+        "restaurant_id": userId,
+        "items" : [{
+          "id" : widget.arguments[0]["id"],
+          "category": controlsTextOneController.value.text,
+          "name": nameTextOneController.value.text,
+          "about": controlsTextTwoController.value.text,
+          "originalPrice": itemOriginalPriceController.value.text,
+          "discountPrice": itemDiscountPriceController.value.text,
+          "image": itemList,
+        }],
+      }),
+    );
+
+    if (response.statusCode == 200) {
+
+      Navigator.pop(context);
+    } else {
+      throw Exception('Failed to create restaurant.');
+    }
+  }
+
+  int getRandomInt() {
+    Random random = new Random();
+    int randomNumber = random.nextInt(10000);
+    print("randomNumber-  " + randomNumber.toString());
+    String unique = randomNumber.toString();
+    return int.parse(unique);
+  }
+
+
+
+  Future<dynamic> createdEstablishmentAddItems(itemList) async {
+
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? token = prefs.getString('token');
+    int? userId = prefs.getInt('restarantId');
+
+    final response = await http.post(
+      Uri.parse('http://ec2-34-227-30-202.compute-1.amazonaws.com/api/create/menu'),
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': token!,
+      },
+
+        body: jsonEncode(<dynamic,dynamic>{
+        "restaurant_id": userId,
+        "items" : [{
+       "id" : getRandomInt,
+      "category": controlsTextOneController.value.text,
+      "name": nameTextOneController.value.text,
+      "about": controlsTextTwoController.value.text,
+      "originalPrice": itemOriginalPriceController.value.text,
+      "discountPrice": itemDiscountPriceController.value.text,
+      "image": itemList,
+      }],
+      }),
+    );
+
+    if (response.statusCode == 200) {
+
+      Navigator.pop(context);
+    } else {
+      throw Exception('Failed to create restaurant.');
+    }
+  }
+
 
 
   void getValuesFromMap(Map map) {

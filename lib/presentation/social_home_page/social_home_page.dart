@@ -9,6 +9,7 @@ import '../../core/utils/size_utils.dart';
 import '../../routes/app_routes.dart';
 import '../../theme/app_decoration.dart';
 import '../../theme/app_style.dart';
+import '../../widgets/app_bar/custom_app_bar.dart';
 import '../../widgets/custom_floating_button.dart';
 import '../../widgets/custom_image_view.dart';
 import '../Establishment_Sign_Up/list_establishment_post_item_widget.dart';
@@ -18,10 +19,28 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 
-class SocialHomePage extends StatelessWidget {
+class SocialHomePage extends StatefulWidget {
   const SocialHomePage({super.key});
 
+  @override
+  State<SocialHomePage> createState() => _SocialHomePageState();
+}
 
+class _SocialHomePageState extends State<SocialHomePage> with TickerProviderStateMixin {
+  tabBarList() {
+    return [Tab(text: "Social"),
+      Tab(text: "I am Buying"),
+    ];
+  }
+
+  late TabController _nestedTabController;
+
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    _nestedTabController  = TabController(length: tabBarList().length, vsync: this);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,72 +49,205 @@ class SocialHomePage extends StatelessWidget {
         bottom: false,
         child: Scaffold(
             backgroundColor: ColorConstant.whiteA700,
-            body: SizedBox(
-                width: size.width,
-                child: SingleChildScrollView(
-                    child:      Padding(
-                    padding: getPadding(
-                    left: 20, top: 17, right: 20),
-    child: ListView.separated(
-    physics:
-    NeverScrollableScrollPhysics(),
-    shrinkWrap: true,
-    separatorBuilder:
-    (context, index) {
-    return Container(
-    height:
-    getVerticalSize(1.00),
-    width: getHorizontalSize(
-    275.00),
-    decoration: BoxDecoration(
-    color: ColorConstant
-        .gray300,
-    borderRadius:
-    BorderRadius.circular(
-    getHorizontalSize(
-    1.00))));
-    },
-    itemCount: 1,
-    itemBuilder: (context, index) {
-    return
-    // Column(
-    // children: itemList.map((userone){
-
-    FutureBuilder<List>(
-    future: orderById(),
-    builder: (BuildContext context, AsyncSnapshot<List>snapshot) {
-    // List? listVal;
-    // snapshot.data?.map((key, userone){
-    //   // print(key);
-    //   // print(userone);
-    //   // listVal = userone;
-    //   // var listItems = userone["items"];
-    //   // print(listItems);
-    //   // // final key = userone.keys.elementAt(0);
-    //   // Map<String, dynamic> value = userone[key];
-    //
-    //
-    //
-    //   return userone;
-    // });
-
-    if (snapshot.connectionState == ConnectionState.waiting) {
-    return const CircularProgressIndicator();
-    } else if (snapshot.hasError) {
-    return Text('Error: ${snapshot.error}');
-    } else {
-    return Column(
-    children: snapshot.data!.map((userone){
-    return ListestablishmentPostItemWidget(
-    listItemArray: userone,
-    );}).toList());
-    }}
-    );
-    }
-    ),
+            appBar:CustomAppBar(
+        height: getVerticalSize(95.00),
+    leadingWidth: size.width,
+    leading: Container(
+              // color: Colors.blue,
+              height: 40,
+              width: size.width,
+              margin: const EdgeInsets.fromLTRB(0, 0, 0, 5),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  TabBar(
+                    onTap: (index) {
+                      // print("Amit Amit Amit $index");
+                      // selectionValue = index;
+                      _nestedTabController.animateTo(index);
+                      // setState(() {
+                      //
+                      //  });
+                    },
+                    controller: _nestedTabController,
+                    indicatorSize: TabBarIndicatorSize.label,
+                    indicatorColor: Colors.pink,
+                    labelColor: ColorConstant.gray90001,
+                    tabAlignment: TabAlignment.start,
+                    // indicator: BoxDecoration(
+                    //     borderRadius: BorderRadius.circular(50), // Creates border
+                    //     color: Colors.blue),
+                    // labelColor: Colors.black, //<-- selected text color
+                    unselectedLabelColor: Colors.grey,//
+                    isScrollable: true,
+                    dividerColor: Colors.transparent,
+                    // padding: getPadding(left: 5),
+                    indicatorPadding: EdgeInsets.zero,
+                     // labelPadding: getPadding(bottom: 5),
+                    labelStyle: const TextStyle(fontSize: 18,fontFamily: 'Family Name'),  //For Selected tab
+                    unselectedLabelStyle: const TextStyle(fontSize: 15.0,fontFamily: 'Family Name'),
+                    //For Un-selected Tabs
+                    tabs: tabBarList(),
+                  ),
+                  SizedBox(height: 10),
+                  Container(
+                    color: Colors.grey,
+                    width: size.width,
+                    height: 1,
+                  )
+                ],
+              ),
             ),
+            actions: [
+              Padding(
+                padding: const EdgeInsets.only(bottom: 25.0),
+                child: IconButton(
+                  onPressed: () {
+
+            }, icon: const Icon(
+                  Icons.person_outline_sharp,
+                  color: Colors.grey,
+                )),
+              )],),
+
+            body: TabBarView(
+        controller: _nestedTabController,
+        physics: const NeverScrollableScrollPhysics(),
+    children: <Widget>[
+      SizedBox(
+        width: size.width,
+        child: SingleChildScrollView(
+          child:      Padding(
+            padding: getPadding(
+                left: 20, top: 17, right: 20),
+            child: ListView.separated(
+                physics:
+                const NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                separatorBuilder:
+                    (context, index) {
+                  return Container(
+                      height:
+                      getVerticalSize(1.00),
+                      width: getHorizontalSize(
+                          275.00),
+                      decoration: BoxDecoration(
+                          color: ColorConstant
+                              .gray300,
+                          borderRadius:
+                          BorderRadius.circular(
+                              getHorizontalSize(
+                                  1.00))));
+                },
+                itemCount: 1,
+                itemBuilder: (context, index) {
+                  return
+                    // Column(
+                    // children: itemList.map((userone){
+
+                    FutureBuilder<List>(
+                        future: orderById(),
+                        builder: (BuildContext context, AsyncSnapshot<List>snapshot) {
+                          // List? listVal;
+                          // snapshot.data?.map((key, userone){
+                          //   // print(key);
+                          //   // print(userone);
+                          //   // listVal = userone;
+                          //   // var listItems = userone["items"];
+                          //   // print(listItems);
+                          //   // // final key = userone.keys.elementAt(0);
+                          //   // Map<String, dynamic> value = userone[key];
+                          //
+                          //
+                          //
+                          //   return userone;
+                          // });
+
+                          if (snapshot.connectionState == ConnectionState.waiting) {
+                            return const CircularProgressIndicator();
+                          } else if (snapshot.hasError) {
+                            return Text('Error: ${snapshot.error}');
+                          } else {
+                            return Column(
+                                children: snapshot.data!.map((userone){
+                                  return ListestablishmentPostItemWidget(
+                                    listItemArray: userone,
+                                  );}).toList());
+                          }}
+                    );
+                }
+            ),
+          ),
         ),
+      ),
+      SizedBox(
+        width: size.width,
+        child: SingleChildScrollView(
+          child:      Padding(
+            padding: getPadding(
+                left: 20, top: 17, right: 20),
+            child: ListView.separated(
+                physics:
+                const NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                separatorBuilder:
+                    (context, index) {
+                  return Container(
+                      height:
+                      getVerticalSize(1.00),
+                      width: getHorizontalSize(
+                          275.00),
+                      decoration: BoxDecoration(
+                          color: ColorConstant
+                              .gray300,
+                          borderRadius:
+                          BorderRadius.circular(
+                              getHorizontalSize(
+                                  1.00))));
+                },
+                itemCount: 1,
+                itemBuilder: (context, index) {
+                  return
+                    // Column(
+                    // children: itemList.map((userone){
+
+                    FutureBuilder<List>(
+                        future: orderById(),
+                        builder: (BuildContext context, AsyncSnapshot<List>snapshot) {
+                          // List? listVal;
+                          // snapshot.data?.map((key, userone){
+                          //   // print(key);
+                          //   // print(userone);
+                          //   // listVal = userone;
+                          //   // var listItems = userone["items"];
+                          //   // print(listItems);
+                          //   // // final key = userone.keys.elementAt(0);
+                          //   // Map<String, dynamic> value = userone[key];
+                          //
+                          //
+                          //
+                          //   return userone;
+                          // });
+
+                          if (snapshot.connectionState == ConnectionState.waiting) {
+                            return const CircularProgressIndicator();
+                          } else if (snapshot.hasError) {
+                            return Text('Error: ${snapshot.error}');
+                          } else {
+                            return Column(
+                                children: snapshot.data!.map((userone){
+                                  return ListestablishmentPostItemWidget(
+                                    listItemArray: userone,
+                                  );}).toList());
+                          }}
+                    );
+                }
             ),
+          ),
+        ),
+      ),
+    ]),
             floatingActionButton:
             SpeedDial( //Speed dial menu
               // marginBottom: 10, //margin bottom

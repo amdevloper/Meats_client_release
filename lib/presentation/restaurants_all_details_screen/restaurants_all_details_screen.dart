@@ -16,6 +16,7 @@ import '../new_notifications_page/new_notifications_page.dart';
 import '../restaurants_all_details_screen/widgets/grid1_item_widget.dart';
 import 'package:flutter/material.dart';
 
+import '../restaurants_edit_screen/restaurants_edit_screen.dart';
 import '../social_home_page/social_home_page.dart';
 
 class RestaurantsAllDetailsScreen extends StatefulWidget {
@@ -82,9 +83,15 @@ class _RestaurantsAllDetailsScreenState extends State<RestaurantsAllDetailsScree
                                         Align(
                                             alignment: Alignment.topRight,
                                             child: GestureDetector(
-                                                onTap: () {
-                                                  onTapControlsSteppers(
-                                                      context);
+                                                onTap: () async {
+                                                  // onTapControlsSteppers(
+                                                  //     context);
+
+                                                  final result = await Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                        builder: (context) => RestaurantsEditScreen(arguments: [ widget.arguments[0],widget.arguments[1]]),
+                                                      ));
                                                 },
                                                 child: Container(
                                                   height:
@@ -131,7 +138,7 @@ class _RestaurantsAllDetailsScreenState extends State<RestaurantsAllDetailsScree
                                                       padding: getPadding(
                                                           left: 19, right: 47),
                                                       child: Row(children: [
-                                                        Text(widget.arguments['name'],
+                                                        Text(widget.arguments[0]['name'],
                                                             overflow:
                                                                 TextOverflow
                                                                     .ellipsis,
@@ -152,7 +159,7 @@ class _RestaurantsAllDetailsScreenState extends State<RestaurantsAllDetailsScree
                                                                     borderRadius:
                                                                         BorderRadiusStyle
                                                                             .txtRoundedBorder4),
-                                                            child: Text(widget.arguments['status'],
+                                                            child: Text(widget.arguments[0]['status'],
                                                                 overflow:
                                                                     TextOverflow
                                                                         .ellipsis,
@@ -174,7 +181,7 @@ class _RestaurantsAllDetailsScreenState extends State<RestaurantsAllDetailsScree
                                                               TextAlign.left,
                                                           style: AppStyle
                                                               .txtRobotoRegular16Gray900)),
-                        if(widget.arguments["rating"] != null) ...[
+                        if(widget.arguments[0]["rating"] != null) ...[
                 Padding(
                           padding: const EdgeInsets.only(left: 20,top: 10),
                           child: Positioned(
@@ -192,7 +199,7 @@ class _RestaurantsAllDetailsScreenState extends State<RestaurantsAllDetailsScree
                               child: Row(
                                 children: [
                                   const SizedBox(width: 5),
-                                   Text(widget.arguments["rating"]),
+                                   Text(widget.arguments[0]["rating"]),
                                   const SizedBox(width: 5),
                                   CustomImageView(svgPath:ImageConstant.imgStar),
                                 ],
@@ -205,7 +212,7 @@ class _RestaurantsAllDetailsScreenState extends State<RestaurantsAllDetailsScree
                                                       padding: getPadding(
                                                           left: 19, top: 7),
                                                       child: Text(
-                                                          widget.arguments["location"],
+                                                          widget.arguments[0]["location"],
                                                           overflow: TextOverflow
                                                               .ellipsis,
                                                           textAlign:
@@ -226,7 +233,7 @@ class _RestaurantsAllDetailsScreenState extends State<RestaurantsAllDetailsScree
                                       ])),
                               Padding(
                                 padding: const EdgeInsets.only(left: 19, right: 11,top: 5, bottom: 5),
-                                child: Text(widget.arguments['description'],
+                                child: Text(widget.arguments[0]['description'],
                       overflow: TextOverflow.ellipsis,
                       textAlign: TextAlign.start,
                       style: AppStyle.txtRobotoRegular14Gray900,
@@ -245,7 +252,7 @@ class _RestaurantsAllDetailsScreenState extends State<RestaurantsAllDetailsScree
                                       textAlign: TextAlign.left,
                                       style: AppStyle.txtRobotoMedium14)),
 
-                          if(widget.arguments['image'].isNotEmpty) ...[
+                          if(widget.arguments[0]['image'].isNotEmpty) ...[
                               Align(
                                   alignment: Alignment.center,
                                   child: Padding(
@@ -264,10 +271,10 @@ class _RestaurantsAllDetailsScreenState extends State<RestaurantsAllDetailsScree
                                                       getHorizontalSize(4.00)),
                                           physics:
                                               NeverScrollableScrollPhysics(),
-                                          itemCount: widget.arguments['image'].length ?? 0,
+                                          itemCount: widget.arguments[0]['image'].length ?? 0,
                                           itemBuilder: (context, index) {
                                             return Grid1ItemWidget(
-                                              listOfImage: widget.arguments['image'][index],
+                                              listOfImage: widget.arguments[0]['image'][index],
                                                 onTapImgImagePlaceholder: () =>
                                                 showMessageView(context));
                                           })))],

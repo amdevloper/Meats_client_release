@@ -13,6 +13,7 @@ import '../../widgets/app_bar/custom_app_bar.dart';
 import '../../widgets/custom_button.dart';
 import '../../widgets/custom_image_view.dart';
 import '../../widgets/custom_switch.dart';
+import '../Establishment_Sign_Up/menu_item_add1_screen/menu_item_add1_screen.dart';
 import '../menu1_page/widgets/listrectangle4322_one_item_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:lite_rolling_switch/lite_rolling_switch.dart';
@@ -155,14 +156,33 @@ class _Menu1PageState extends State<Menu1Page> {
                                 AsyncSnapshot<Map<String, dynamic>> snapshotValue) {
                               if (snapshotValue.connectionState ==
                                   ConnectionState.waiting) {
-                                return CircularProgressIndicator();
+                                return const CircularProgressIndicator();
                               } else if (snapshotValue.hasError) {
                                 return Text("Error : ${snapshotValue.error}");
                               } else {
+    String? cusineValue;
+    // print("length chech it ${cusineData["cuisines"].length}");
+    // print("value chech it ${cusineData["cuisines"]}");
+
+    // for(int i = 0; i > cusineData["cuisines"].length; i++)
+    // {
+    // if(snapshotValue.data!["response"]["cuisine"]['id'] = cusineData["cuisines"][0]['id']) {
+    // cusineValue = cusineData[1];
+    // }
+    // }
 
 
-                                var data = snapshotValue.data!["response"]["cuisine"];
-                                print(data);
+     for (var el in cusineData["cuisines"])
+     {
+       if(snapshotValue.data!["response"]["cuisine"][0] == el['id']) {
+         cusineValue = el["cuisine"];
+     }
+     }
+
+
+                                // snapshotValue.data!["response"]
+                                // var data = snapshotValue.data!["response"]["cuisine"];
+                                // print(data);
                                 // int index = cusineData["cuisines"][0].indexWhere((item)
                                 // {
                                 //   print("hihihih ${item["id"]}");
@@ -194,7 +214,7 @@ class _Menu1PageState extends State<Menu1Page> {
                                                           final result = await Navigator.push(
                                                               context,
                                                               MaterialPageRoute(
-                                                                builder: (context) => RestaurantsEditScreen(arguments: snapshotValue.data!["response"]),
+                                                                builder: (context) => RestaurantsEditScreen(arguments: [ snapshotValue.data!["response"], cusineValue]),
                                                               ));
 
                                                         },
@@ -295,7 +315,8 @@ class _Menu1PageState extends State<Menu1Page> {
                                                                       left: 19,
                                                                       top: 9),
                                                               child: Text(
-                                                                  "${snapshotValue.data!["response"]["cuisine"]}",
+                                                                // "cuisine",
+                                                                  cusineValue ?? '',
                                                                   overflow:
                                                                       TextOverflow
                                                                           .ellipsis,
@@ -360,7 +381,7 @@ class _Menu1PageState extends State<Menu1Page> {
                                                                     final result = await Navigator.push(
                                                                         context,
                                                                         MaterialPageRoute(
-                                                                          builder: (context) => RestaurantsAllDetailsScreen(arguments: snapshotValue.data!["response"]),
+                                                                          builder: (context) => RestaurantsAllDetailsScreen(arguments: [snapshotValue.data!["response"], cusineValue]),
                                                                         ));
 
                                                                   },
@@ -558,6 +579,16 @@ class _Menu1PageState extends State<Menu1Page> {
                                                                         index,
                                                                     listValues:
                                                                         userone,
+                                                                    onClick:(value) async {
+
+                                                                      final result = await Navigator.push(
+                                                                          context,
+                                                                          MaterialPageRoute(
+                                                                            builder: (context) => MenuItemAdd1Screen(arguments: [value , "edit"]),
+                                                                          ));
+
+
+                                                                    } ,
                                                                   );
                                                                 }).toList(),
                                                               ),
@@ -1300,7 +1331,12 @@ class _Menu1PageState extends State<Menu1Page> {
 
   }
 
-  onTapAdditem(BuildContext context) {
-    Navigator.pushNamed(context, AppRoutes.menuItemAdd1Screen);
+  onTapAdditem(BuildContext context) async {
+    final result = await Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const MenuItemAdd1Screen(arguments: ['' , "add"]),
+        ));
+
   }
 }

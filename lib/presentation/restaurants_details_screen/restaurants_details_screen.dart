@@ -52,7 +52,7 @@ class _RestaurantsDetailsScreenState extends State<RestaurantsDetailsScreen>
   int sellectedSubTask  = 0;
   dynamic valNew;
   Map<String, dynamic> restaurantApplicationData = {};
-
+  bool isFollow = false;
   // Future<Map<String, dynamic>> restaruntById() async {
   //   final SharedPreferences prefs = await SharedPreferences.getInstance();
   //   String? token = prefs.getString('token');
@@ -209,13 +209,41 @@ class _RestaurantsDetailsScreenState extends State<RestaurantsDetailsScreen>
                                     style: AppStyle.txtRobotoMedium12WhiteA700),
                               )),
                           const Spacer(),
-                          CustomButton(
-                              height: 50,
-                              width: 96,
-                              text: "Unfollow",
-                              margin: getMargin(right: 20),
-                              variant: ButtonVariant.FillBluegray300,
-                              alignment: Alignment.topRight),
+                          Padding(
+                            padding: const EdgeInsets.only(right: 8.0),
+                            child: ElevatedButton(onPressed: () async {
+                              await addFollowers().then((value)
+                              {
+                                isFollow = value;
+                                setState(() {
+                                });
+                              });
+                            },
+                              style: ElevatedButton.styleFrom(
+                                  backgroundColor: isFollow ? Colors.blue : Colors.blueGrey,
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius:
+                                      BorderRadius.circular(
+                                        20,
+                                      ))),
+                              child: Text(isFollow ? "Follow" : "Unfollow",),
+                            ),
+                          )
+                          // CustomButton(
+                          //     height: 50,
+                          //     width: 96,
+                          //     text: isFollow ? "Follow" : "Unfollow",
+                          //     margin: getMargin(right: 20),
+                          //     variant: isFollow ? ButtonVariant.FillRed300 : ButtonVariant.FillBluegray300,
+                          //     alignment: Alignment.topRight,
+                          // onTap: () async {
+                          //  await addFollowers().then((value)
+                          //   {
+                          //     isFollow = value;
+                          //     setState(() {
+                          //     });
+                          //   });
+                          // },),
                         ])),
                     Padding(
                         padding: getPadding(left: 20, top: 9),
@@ -422,6 +450,15 @@ class _RestaurantsDetailsScreenState extends State<RestaurantsDetailsScreen>
                           fontSize: 15.0, fontFamily: 'Family Name'),
                       tabs: tabBarList(),
                     ),
+                    Container(
+                        height: getVerticalSize(1.00),
+                        width: size.width,
+                        margin: getMargin(top: 7),
+                        decoration: BoxDecoration(
+                            color: ColorConstant.gray300,
+                            borderRadius: BorderRadius.circular(
+                                getHorizontalSize(1.00)))),
+
                   ]),
               Container(
                 width: size.width,
@@ -429,6 +466,7 @@ class _RestaurantsDetailsScreenState extends State<RestaurantsDetailsScreen>
                 child: TabBarView(controller: _nestedTabController, children: [
                   SingleChildScrollView(
                     child: Container(
+                      padding: EdgeInsets.only(top: 10),
                         // height: getVerticalSize(size.height/2.5),
                         width: getHorizontalSize(size.width),
                         margin: getMargin(left: 10),
@@ -508,31 +546,31 @@ class _RestaurantsDetailsScreenState extends State<RestaurantsDetailsScreen>
                                                       fontFamily: 'Roboto',
                                                       fontWeight:
                                                           FontWeight.w400))),
-                                    Container(
-                                        width: getHorizontalSize(318.00),
-                                        margin: getMargin(left: 1, top: 13),
-                                        child: RichText(
-                                            text: TextSpan(children: [
-                                              TextSpan(
-                                                  text: "Download App now: ",
-                                                  style: TextStyle(
-                                                      color:
-                                                      ColorConstant.gray900,
-                                                      fontSize: getFontSize(12),
-                                                      fontFamily: 'Roboto',
-                                                      fontWeight:
-                                                      FontWeight.w400)),
-                                              TextSpan(
-                                                  text: "https://rb.gy/hdotmb",
-                                                  style: TextStyle(
-                                                      color: ColorConstant
-                                                          .indigo900,
-                                                      fontSize: getFontSize(12),
-                                                      fontFamily: 'Roboto',
-                                                      fontWeight:
-                                                      FontWeight.w400))
-                                            ]),
-                                            textAlign: TextAlign.left)),
+                                    // Container(
+                                    //     width: getHorizontalSize(318.00),
+                                    //     margin: getMargin(left: 1, top: 13),
+                                    //     child: RichText(
+                                    //         text: TextSpan(children: [
+                                    //           TextSpan(
+                                    //               text: "Download App now: ",
+                                    //               style: TextStyle(
+                                    //                   color:
+                                    //                   ColorConstant.gray900,
+                                    //                   fontSize: getFontSize(12),
+                                    //                   fontFamily: 'Roboto',
+                                    //                   fontWeight:
+                                    //                   FontWeight.w400)),
+                                    //           TextSpan(
+                                    //               text: "https://rb.gy/hdotmb",
+                                    //               style: TextStyle(
+                                    //                   color: ColorConstant
+                                    //                       .indigo900,
+                                    //                   fontSize: getFontSize(12),
+                                    //                   fontFamily: 'Roboto',
+                                    //                   fontWeight:
+                                    //                   FontWeight.w400))
+                                    //         ]),
+                                    //         textAlign: TextAlign.left)),
 
                                     Padding(
                                         padding: getPadding(left: 1, top: 8),
@@ -546,7 +584,7 @@ class _RestaurantsDetailsScreenState extends State<RestaurantsDetailsScreen>
                                                   child: RichText(
                                                       text: TextSpan(children: [
                                                         TextSpan(
-                                                            text: "50",
+                                                            text: widget.arguments!["likes"] ?? "0",
                                                             style: TextStyle(
                                                                 color:
                                                                     ColorConstant
@@ -597,7 +635,7 @@ class _RestaurantsDetailsScreenState extends State<RestaurantsDetailsScreen>
                                                   child: RichText(
                                                       text: TextSpan(children: [
                                                         TextSpan(
-                                                            text: "12",
+                                                            text: widget.arguments!["comments"] ?? "0",
                                                             style: TextStyle(
                                                                 color:
                                                                     ColorConstant
@@ -1062,7 +1100,6 @@ class _RestaurantsDetailsScreenState extends State<RestaurantsDetailsScreen>
                   SingleChildScrollView(
                     child: Container(
                       height: size.height / 0.6,
-                      padding: const EdgeInsets.only(top: 20),
                       child: Column(
                         children: [
                           Padding(
@@ -1146,85 +1183,88 @@ class _RestaurantsDetailsScreenState extends State<RestaurantsDetailsScreen>
 
 
 
-                                            return ExpansionTile(
-                                                key: Key(index.toString()),
-                                                //attention
-                                                initiallyExpanded:
-                                                    index == selected,
-                                                // leading: Text("$key"),
-                                                title: Text(
-                                                  "$key",
-                                                  style: const TextStyle(
-                                                      fontSize: 18,
-                                                      fontWeight:
-                                                          FontWeight.bold),
-                                                ),
-                                                children: [
-                                                  Column(
-                                                    children:
-                                                        value.map((userone) {
-                                                      return Listrectangle4322ItemWidget(
-                                                          index: index,
-                                                          itemArray: userone,
-                                                          // addItems:(value,id) => addItems(value, id),
-                                                          removeItem:
-                                                              (value, id) {
-                                                            setState(() {
-                                                              objectBox.removeItem(
-                                                                  userone[
-                                                                      "category"],
-                                                                  userone[
-                                                                      "name"],
-                                                                  userone[
-                                                                      "about"],
-                                                                  userone[
-                                                                      "originalPrice"],
-                                                                  userone[
-                                                                      "discountPrice"],
-                                                                  userone[
-                                                                      "image"],
-                                                                  value,
-                                                                  id);
-                                                            });
-                                                          },
-                                                          addItems:
-                                                              (value, id) async {
-                                                             setState(() {
-                                                              objectBox.afterItemList(
-                                                                  userone[
-                                                                      "category"],
-                                                                  userone[
-                                                                      "name"],
-                                                                  userone[
-                                                                      "about"],
-                                                                  userone[
-                                                                      "originalPrice"],
-                                                                  userone[
-                                                                      "discountPrice"],
-                                                                  userone[
-                                                                      "image"],
-                                                                  value,
-                                                                  id);
-                                                             });
-
-
-
-
-                                                            itemList = await objectBox.getItemList();
-                                                            cartItemAmount = 0;
-                                                            for (int i = 0; i < itemList.length; i++) {
-                                                              print("Amititititi ${itemList[i].originalPrice}");
-                                                              cartItemAmount = cartItemAmount + double.parse(itemList[i].originalPrice) ;
-                                                            }
-                                                            // value.map((userone) {
-                                                            //   cartItemAmount = double.parse(userone["originalPrice"]);
-                                                            // }).toList();
-                                                          }
-                                                          // addCustomizationPage: () =>  Navigator.pushNamed(context, AppRoutes.customizeScreen),
-                                                           );
-                                                    }).toList(),
+                                            return Theme(
+                                              data: index == 0 ? Theme.of(context).copyWith(dividerColor: Colors.transparent) : Theme.of(context).copyWith(dividerColor: Colors.grey), //new
+                                              child: ExpansionTile(
+                                                  key: Key(index.toString()),
+                                                  //attention
+                                                  initiallyExpanded:
+                                                      index == selected,
+                                                  // leading: Text("$key"),
+                                                  title: Text(
+                                                    "$key",
+                                                    style: const TextStyle(
+                                                        fontSize: 18,
+                                                        fontWeight:
+                                                            FontWeight.bold),
                                                   ),
-                                                ]);
+                                                  children: [
+                                                    Column(
+                                                      children:
+                                                          value.map((userone) {
+                                                        return Listrectangle4322ItemWidget(
+                                                            index: index,
+                                                            itemArray: userone,
+                                                            // addItems:(value,id) => addItems(value, id),
+                                                            removeItem:
+                                                                (value, id) {
+                                                              setState(() {
+                                                                objectBox.removeItem(
+                                                                    userone[
+                                                                        "category"],
+                                                                    userone[
+                                                                        "name"],
+                                                                    userone[
+                                                                        "about"],
+                                                                    userone[
+                                                                        "originalPrice"],
+                                                                    userone[
+                                                                        "discountPrice"],
+                                                                    userone[
+                                                                        "image"],
+                                                                    value,
+                                                                    id);
+                                                              });
+                                                            },
+                                                            addItems:
+                                                                (value, id) async {
+                                                               // setState(() {
+                                                                objectBox.afterItemList(
+                                                                    userone[
+                                                                        "category"],
+                                                                    userone[
+                                                                        "name"],
+                                                                    userone[
+                                                                        "about"],
+                                                                    userone[
+                                                                        "originalPrice"],
+                                                                    userone[
+                                                                        "discountPrice"],
+                                                                    userone[
+                                                                        "image"],
+                                                                    value,
+                                                                    id);
+                                                               // });
+
+
+
+
+                                                              itemList = await objectBox.getItemList();
+                                                              cartItemAmount = 0;
+                                                              for (int i = 0; i < itemList.length; i++) {
+                                                                print("Amititititi ${itemList[i].originalPrice}");
+                                                                cartItemAmount = cartItemAmount + double.parse(itemList[i].originalPrice) ;
+                                                              }
+                                                              // value.map((userone) {
+                                                              //   cartItemAmount = double.parse(userone["originalPrice"]);
+                                                              // }).toList();
+                                                            }
+                                                            // addCustomizationPage: () =>  Navigator.pushNamed(context, AppRoutes.customizeScreen),
+                                                             );
+                                                      }).toList(),
+                                                    ),
+                                                  ]),
+                                            );
 
                                             // // String key = values.keys.elementAt(index);
                                             // return  Column(
@@ -1530,6 +1570,44 @@ class _RestaurantsDetailsScreenState extends State<RestaurantsDetailsScreen>
   //       return HomeGroceryPage();
   //   }
   // }
+
+  Future<dynamic> addFollowers() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? token = prefs.getString('token');
+    int? userId = prefs.getInt('restarantId');
+
+    // var studentsmap = itemList.map((e){
+    //   return {
+    //     "category": e.name,
+    //     "name": e.name,
+    //     "about": e.about,
+    //     "originalPrice": e.originalPrice,
+    //     "discountPrice": e.discountPrice,
+    //     "image": e.image,
+    //   };
+    // }).toList();
+
+    final response = await http.post(
+      Uri.parse(
+          'http://ec2-34-227-30-202.compute-1.amazonaws.com/api/restaurant/add-follower'),
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': token!,
+      },
+      body: jsonEncode(<dynamic, dynamic>{
+        "restaurant_id": userId,
+        "followerId" : widget.arguments["menu"]
+       }),
+    );
+
+    if (response.statusCode == 200) {
+      return true;
+      // Navigator.pop(context);
+    } else {
+      throw Exception('Follower no');
+    }
+  }
+
 
   Future<dynamic> addReview(BuildContext context) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();

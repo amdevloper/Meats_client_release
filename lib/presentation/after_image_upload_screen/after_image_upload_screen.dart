@@ -211,7 +211,7 @@ class _AfterImageUploadScreenState extends State<AfterImageUploadScreen> {
         http.MultipartFile.fromBytes(
           'file',
           _image.readAsBytesSync(),
-          filename: "image_ $value",
+          filename: "image_$value",
         )
     );
     http.StreamedResponse response = await req.send();
