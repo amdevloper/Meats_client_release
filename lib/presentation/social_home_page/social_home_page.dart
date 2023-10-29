@@ -104,6 +104,7 @@ class _SocialHomePageState extends State<SocialHomePage> with TickerProviderStat
                 padding: const EdgeInsets.only(bottom: 25.0),
                 child: IconButton(
                   onPressed: () {
+                    Navigator.pushNamed(context, AppRoutes.friendList);
 
             }, icon: const Icon(
                   Icons.person_outline_sharp,

@@ -65,6 +65,7 @@ import '../presentation/cryptocyrrency_screen/cryptocyrrency_screen.dart';
 import '../presentation/edit_profile_screen/edit_profile_screen.dart';
 import '../presentation/faq_s_screen/faq_s_screen.dart';
 import '../presentation/forgot_password_screen/forgot_password_screen.dart';
+import '../presentation/friends_list.dart';
 import '../presentation/gallery_full_view_screen/gallery_full_view_screen.dart';
 import '../presentation/go_live_home_screen/go_live_home_screen.dart';
 import '../presentation/group_18137_screen/group_18137_screen.dart';
@@ -181,6 +182,8 @@ class AppRoutes {
   static const String forgotPasswordScreen = '/forgot_password_screen';
 
   static const String passwordResetScreen = '/password_reset_screen';
+
+  static const String friendList = '/friends_list';
 
   static const String passwordResetSuccessScreen =
       '/password_reset_success_screen';
@@ -412,11 +415,12 @@ class AppRoutes {
 
   static Map<String, WidgetBuilder> routes = {
 
+    friendList:(context) => const FriendList(),
     profileSetupScreen:(context) => ProfileSetupScreen(),
-    liveHomePage:(context) => LiveHomePage(),
-    searchDishScreen:(context) => SearchDishScreen(),
+    liveHomePage:(context) => const LiveHomePage(),
+    searchDishScreen:(context) => const SearchDishScreen(),
     checkoutIfNoAnyCardsAddedScreen:(context) => CheckoutIfNoAnyCardsAddedScreen(),
-    cartDeliveryAddressNotAvailableScreen:(context) =>  CartDeliveryAddressNotAvailableScreen(),
+    cartDeliveryAddressNotAvailableScreen:(context) =>  const CartDeliveryAddressNotAvailableScreen(),
     restaurantsDetailsScreen:(context) => RestaurantsDetailsScreen(arguments: ModalRoute.of(context)?.settings.arguments,),
     restaurantsScreen:(context) => RestaurantsScreen(arguments: ModalRoute.of(context)?.settings.arguments,),
     bottomNavigationTabBar:(BuildContext context) => BottomNavigationTabBar(arguments: ModalRoute.of(context)?.settings.arguments,),
@@ -459,12 +463,12 @@ class AppRoutes {
     menuDetails1Screen: (context) => MenuDetails1Screen(),
     myWallScreen: (context) => MyWallScreen(),
     // myProfilePage: (context) => MyProfilePage(),
-    editProfileScreen: (context) => EditProfileScreen(),
+    editProfileScreen: (context) => const EditProfileScreen(),
     changePasswordScreen: (context) => ChangePasswordScreen(),
-    manageTimingScreen: (context) => ManageTimingScreen(),
+    manageTimingScreen: (context) => const ManageTimingScreen(),
     updateTimeScreen: (context) => UpdateTimeScreen(),
     reviewsScreen: (context) => ReviewsScreen(),
-    noReviewsScreen: (context) => NoReviewsScreen(),
+    noReviewsScreen: (context) => const NoReviewsScreen(),
     managePaymentsScreen: (context) => ManagePaymentsScreen(),
     cryptocyrrencyScreen: (context) => CryptocyrrencyScreen(),
     otherStatusScreen: (context) => OtherStatusScreen(),
@@ -496,7 +500,7 @@ class AppRoutes {
     moneyAddedSuccessScreen: (context) => MoneyAddedSuccessScreen(),
     afterWalletAmountAddedScreen: (context) => AfterWalletAmountAddedScreen(),
     userProfileScreen: (context) => UserProfileScreen(),
-    createPostScreen: (context) => CreatePostScreen(),
+    createPostScreen: (context) => const CreatePostScreen(),
     afterImageUploadScreen: (context) => const AfterImageUploadScreen(),
     commentsScreen: (context) => CommentsScreen(),
     notificationOneScreen: (context) => NotificationOneScreen(),

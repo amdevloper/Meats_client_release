@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../core/utils/color_constant.dart';
 import '../../core/utils/image_constant.dart';
@@ -13,6 +14,8 @@ import '../../widgets/custom_button.dart';
 import '../../widgets/custom_image_view.dart';
 import '../../widgets/custom_text_form_field.dart';
 // ignore_for_file: must_be_immutable
+import 'package:http/http.dart' as http;
+
 
 // ignore_for_file: must_be_immutable
 class ForgotPasswordScreen extends StatelessWidget {
@@ -110,6 +113,44 @@ class ForgotPasswordScreen extends StatelessWidget {
                         ]))),
         ));
   }
+
+  Future<dynamic> contactUsFunction(BuildContext context) async {
+
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? token = prefs.getString('token');
+    int? userId = prefs.getInt('restarantId');
+
+    // var studentsmap = itemList.map((e){
+    //   return {
+    //     "category": e.name,
+    //     "name": e.name,
+    //     "about": e.about,
+    //     "originalPrice": e.originalPrice,
+    //     "discountPrice": e.discountPrice,
+    //     "image": e.image,
+    //   };
+    // }).toList();
+
+
+    final response = await http.post(
+      Uri.parse('http://ec2-34-227-30-202.compute-1.amazonaws.com/api/auth/reset'),
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': token!,
+      },
+
+      body: jsonEncode(<dynamic,dynamic>{
+        "email" : controlsTextController.value.text,
+      }),
+    );
+
+    if (response.statusCode == 200) {
+      Navigator.pop(context);
+    } else {
+      throw Exception('Failed to create restaurant.');
+    }
+  }
+
 
   onTapSend(BuildContext context) {
     Navigator.pushNamed(context, AppRoutes.passwordResetScreen);

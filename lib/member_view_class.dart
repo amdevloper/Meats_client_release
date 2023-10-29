@@ -135,7 +135,26 @@ class _MemberViewClassState extends State<MemberViewClass> {
         await json.decode(await response.stream.bytesToString());
     return object;
   }
-
+  Future<Map<String, dynamic>> latestOfferRestaurantDetails() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? token = prefs.getString('token');
+    // int? userId = prefs.getInt('restarantId');
+    // try {
+    var request = http.Request(
+      'GET',
+      Uri.parse(
+          "http://ec2-34-227-30-202.compute-1.amazonaws.com/api/get/all-offers"),
+    )..headers.addAll({
+      'Content-Type': 'application/json',
+      'Authorization': token!,
+    });
+    // var params = {"id": userId};
+    // request.body = jsonEncode(params);
+    http.StreamedResponse response = await request.send();
+    Map<String, dynamic> object =
+    await json.decode(await response.stream.bytesToString());
+    return object;
+  }
 
   @override
   void initState() {

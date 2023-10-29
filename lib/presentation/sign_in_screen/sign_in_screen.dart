@@ -261,7 +261,7 @@ class _SignInScreenState extends State<SignInScreen> {
                                 margin: getMargin(top: 28),
                                 onTap: () async {
                                   // showMessageView();
-                                  // if (_formKey.currentState!.validate()) {
+                                   if (_formKey.currentState!.validate()) {
                                      // if(dropdownItemList[0].toString() == dropdownItemList[0].toString()) {
                                     //   // if(dropdownItemList[0].toString() == "Influencer") {
                                     //     Navigator.of(context).push(MaterialPageRoute(builder: (context) => ProfileSetupScreen()));
@@ -271,30 +271,47 @@ class _SignInScreenState extends State<SignInScreen> {
                                         await prefs.setString('token', data["token"]);
                                         await prefs.setInt('id', data["id"]);
 
-
+                                        if(data["roles"].contains("ESTABLISHMENT")) {
+                                          if(data["firstLogin"] == false) {
+                                            Navigator.pushNamed(context, AppRoutes.establishmentDetailsScreen);
+                                          } else {
+                                            Navigator.of(context).push(MaterialPageRoute(builder: (context) =>
+                                                BottomNavigationTabBar(
+                                                  arguments: dropdownItemList[0].toString(),)));
+                                          }
+                                        }else if(data["roles"].contains("USER")) {
+                                          if(data["firstLogin"] == false) {
+                                            Navigator.pushNamed(context, AppRoutes.establishmentDetailsScreen);
+                                          } else {
+                                            Navigator.of(context).push(MaterialPageRoute(builder: (context) =>
+                                                BottomNavigationTabBar(
+                                                  arguments: dropdownItemList[2].toString(),)));
+                                          }
+                                        }
+                                   }
 
                                         // Map<String, dynamic> dataV = await restaruntById();
                                         // print("Amit Amit Amit ${dataV["response"]["menu"]}");
                                         // prefs.setString("menuId", dataV["response"]["menu"]);
 
 
-                                        if(data["firstLogin"] == false) {
-                                          // if(data["roles"][0] == "ROLE_ESTABLISHMENT") {
-                                          //   Navigator.of(context).push(MaterialPageRoute(builder: (context) =>
-                                          //       BottomNavigationTabBar(
-                                          //         arguments: dropdownItemList[0].toString(),)));
-                                          // }else {
-                                            Navigator.of(context).push(MaterialPageRoute(builder: (context) =>
-                                                BottomNavigationTabBar(
-                                                  arguments: dropdownItemList[2].toString(),)));
-                                          // }
-                                        }else {
-                                          Navigator.pushNamed(context, AppRoutes.establishmentDetailsScreen);
-                                        }
+                                        // if(data["firstLogin"] == false) {
+                                        //   if(data["roles"][0] == "ROLE_ESTABLISHMENT") {
+                                        //     Navigator.of(context).push(MaterialPageRoute(builder: (context) =>
+                                        //         BottomNavigationTabBar(
+                                        //           arguments: dropdownItemList[0].toString(),)));
+                                        //   }else {
+                                        //     Navigator.of(context).push(MaterialPageRoute(builder: (context) =>
+                                        //         BottomNavigationTabBar(
+                                        //           arguments: dropdownItemList[2].toString(),)));
+                                        //   }
+                                        // }else {
+                                        //   Navigator.pushNamed(context, AppRoutes.establishmentDetailsScreen);
+                                        // }
 
                                     // Navigator.of(context).push(MaterialPageRoute(builder: (context) => BottomNavigationTabBar(arguments: dropdownItemList[0].toString(),)));
                                     // }
-                                  // }
+                                   // }
                                 },
                               ),
                               // CustomButton(
